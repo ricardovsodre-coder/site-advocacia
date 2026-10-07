@@ -1,0 +1,20 @@
+# robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://verissimosodre.com.br/sitemap.xml
+Sitemap: https://verissimosodre.com.br/mobile-sitemap.xml
+
+# Disallow admin/private areas
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /_astro/
+Disallow: /_vercel/
+
+# Crawl-delay (be nice to servers)
+Crawl-delay: 10
+
+# Host
+Host: https://verissimosodre.com.br
