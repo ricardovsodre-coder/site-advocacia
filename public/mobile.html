@@ -62,6 +62,7 @@ a{color:inherit;text-decoration:none;display:block}
 .m-header-cta{background:#25D366;border:1px solid #1DA851;color:#fff;font-weight:800;font-size:.8rem;padding:10px 14px;border-radius:10px;display:inline-block}
 /* ---------- Bloco 1: Hero ---------- */
 .m-hero{text-align:center}
+#hero{perspective:1000px}
 .m-kicker{display:block;font-size:1.15rem;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:var(--branco);margin-bottom:12px}
 .m-badge{display:inline-block;padding:7px 14px;border-radius:var(--radius-full);background:rgba(0,140,190,.18);border:1px solid var(--borda-azul);color:var(--azul-claro);font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px}
 .m-hero h1{font-size:2rem;line-height:1.15;font-weight:900;letter-spacing:-.02em;margin-bottom:12px}
@@ -86,6 +87,7 @@ a{color:inherit;text-decoration:none;display:block}
 @property --ang{syntax:'<angle>';initial-value:0deg;inherits:false}
 .m-3d-box::after{content:'';position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:conic-gradient(from var(--ang,0deg),transparent 0%,rgba(0,220,255,.9) 8%,transparent 16%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;animation:giroBorda 6s linear infinite;pointer-events:none}
 @keyframes giroBorda{to{--ang:360deg}}
+.m-glare{position:absolute;inset:0;border-radius:inherit;background:radial-gradient(300px 200px at var(--gx,50%) var(--gy,30%),rgba(255,255,255,.14),transparent 60%);pointer-events:none;z-index:3}
 .m-3d-inner{padding:6px 20px 18px;color:var(--cinza-500);font-size:.82rem;position:relative;z-index:1}
 #balanca3d{width:100%;height:200px;display:block;background:radial-gradient(220px 160px at 50% 55%,rgba(0,200,255,.12),transparent 70%);touch-action:pan-y}
 .m-3d-inner strong{display:block;color:var(--branco);font-size:.95rem;margin-bottom:6px}
@@ -202,6 +204,7 @@ a{color:inherit;text-decoration:none;display:block}
     </div>
     <div class="m-3d-box" id="espaco-3d-mobile" data-3d="balanca-de-vidro-curvas" aria-label="Balança da justiça em vidro com animação 3D">
       <canvas id="balanca3d"></canvas>
+      <div class="m-glare" aria-hidden="true"></div>
       <div class="m-3d-inner">
         <p class="m-msg-rotativa" id="msg3d"><span class="m-msg-titulo">Horas extras</span><span class="m-msg-texto">Adicional de no mínimo 50%, com reflexos em férias, 13º e FGTS.</span></p>
       </div>
@@ -446,6 +449,35 @@ a{color:inherit;text-decoration:none;display:block}
     }
   }
   proximo();
+})();
+// Caixa 3D inclina de verdade com o dedo (vidro real) + reflexo que acompanha
+(function(){
+  var box = document.getElementById('espaco-3d-mobile');
+  if(!box) return;
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var MAX = 10, soltando = null;
+  function inclina(x, y){
+    var r = box.getBoundingClientRect();
+    var px = (x - r.left) / r.width - 0.5;
+    var py = (y - r.top) / r.height - 0.5;
+    box.style.transition = 'transform .06s linear';
+    box.style.transform = 'rotateY(' + (px * MAX * 2).toFixed(2) + 'deg) rotateX(' + (-py * MAX * 2).toFixed(2) + 'deg)';
+    box.style.setProperty('--gx', ((px + 0.5) * 100).toFixed(1) + '%');
+    box.style.setProperty('--gy', ((py + 0.5) * 100).toFixed(1) + '%');
+    clearTimeout(soltando);
+  }
+  function solta(){
+    clearTimeout(soltando);
+    soltando = setTimeout(function(){
+      box.style.transition = 'transform .6s ease';
+      box.style.transform = '';
+    }, 60);
+  }
+  box.addEventListener('touchmove', function(e){ if(e.touches[0]) inclina(e.touches[0].clientX, e.touches[0].clientY); }, {passive:true});
+  box.addEventListener('touchend', solta);
+  box.addEventListener('touchcancel', solta);
+  box.addEventListener('mousemove', function(e){ inclina(e.clientX, e.clientY); });
+  box.addEventListener('mouseleave', solta);
 })();
 // Botão flutuante arrastável (dedo ou mouse), com memória de posição
 (function(){
