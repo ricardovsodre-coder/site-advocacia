@@ -684,10 +684,7 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
     // mesa sutil + cepo + martelo FIXOS (não giram com a balança)
     var madeira = new THREE.MeshPhysicalMaterial({color:0xe8f9ff, metalness:0, roughness:0.06, transmission:1, thickness:1.2, ior:1.5, transparent:true, clearcoat:1, clearcoatRoughness:0.08, side:THREE.DoubleSide});
     var ouroVelho = new THREE.MeshPhysicalMaterial({color:0xe8f9ff, metalness:0, roughness:0.06, transmission:1, thickness:1.2, ior:1.5, transparent:true, clearcoat:1, clearcoatRoughness:0.08, side:THREE.DoubleSide});
-    var mesa = new THREE.Mesh(new THREE.CircleGeometry(6, 48), new THREE.MeshStandardMaterial({color:0x0d0f14, metalness:0.3, roughness:0.3}));
-    mesa.rotation.x = -Math.PI / 2;
-    mesa.position.y = -0.01;
-    scene.add(mesa);
+    // (mesa removida — só balança + martelo com cepo, tudo em vidro)
     var cepoPerfil = [
       new THREE.Vector2(0.0, 0.0),
       new THREE.Vector2(0.78, 0.0),
