@@ -99,8 +99,8 @@ img { max-width: 100%; display: block; }
    ============================================================ */
 @font-face{font-family:'Bauhaus 93';src:url('BAUHS93.TTF') format('truetype');font-display:swap}
 @keyframes logoWrite{0%,20%{opacity:.3;filter:blur(1.5px)}25%,95%{opacity:1;filter:blur(0)}100%{opacity:.3;filter:blur(1.5px)}}
-.logo{display:inline-flex;flex-direction:column;align-items:flex-end;text-align:right;text-decoration:none}
-.logo .logo{font-family:'Bauhaus 93',sans-serif;line-height:1;white-space:nowrap;font-size:1.7rem;animation:logoWrite 10s ease-in-out infinite}
+.logo{display:inline-flex;flex-direction:column;align-items:flex-end;text-align:right;text-decoration:none;flex-shrink:0}
+.logo .logo{display:flex;flex-direction:row;align-items:baseline;font-family:'Bauhaus 93',sans-serif;line-height:1;white-space:nowrap;font-size:1.7rem;animation:logoWrite 10s ease-in-out infinite;flex-shrink:0}
 .logo .logo .l1{color:#00c8ff;text-shadow:0 0 20px rgba(0,200,255,.35)}
 .logo .logo .l2{color:transparent;-webkit-text-stroke:1.5px #00c8ff}
 .logo .logo-sub{font-weight:300;letter-spacing:4px;color:#dfe6ec;font-size:.65rem;margin-top:2px;text-align:right;white-space:nowrap}
