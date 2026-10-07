@@ -629,9 +629,9 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
       var topo = new THREE.Mesh(new THREE.SphereGeometry(0.06, 14, 12), ciano);
       g.add(topo);
       var correntes = new THREE.BufferGeometry().setFromPoints([
-        new THREE.Vector3(0, 0, 0), new THREE.Vector3(0.4, -0.85, 0.1),
-        new THREE.Vector3(0, 0, 0), new THREE.Vector3(-0.4, -0.85, -0.1),
-        new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, -0.9, 0)
+        new THREE.Vector3(0, 0, 0), new THREE.Vector3(0.4, -1.7, 0.1),
+        new THREE.Vector3(0, 0, 0), new THREE.Vector3(-0.4, -1.7, -0.1),
+        new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, -1.8, 0)
       ]);
       g.add(new THREE.LineSegments(correntes, new THREE.LineBasicMaterial({color:0x9be9ff, transparent:true, opacity:0.85})));
       var concha = [
@@ -641,51 +641,13 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
         new THREE.Vector2(0.66, 0.22)
       ];
       var tigela = new THREE.Mesh(new THREE.LatheGeometry(concha, 44), vidro);
-      tigela.position.set(0, -1.0, 0);
+      tigela.position.set(0, -2.0, 0);
       g.add(tigela);
       var borda = new THREE.Mesh(new THREE.TorusGeometry(0.66, 0.024, 10, 48), ciano);
       borda.rotation.x = Math.PI / 2;
-      borda.position.set(0, -0.78, 0);
+      borda.position.set(0, -1.78, 0);
       g.add(borda);
       pratos.push(g);
-    });
-    // holofotes 3D nos cantos superiores (acendem e varrem alternados)
-    var holofotes = [];
-    var _alvo = new THREE.Vector3(), _dir = new THREE.Vector3(), _cima = new THREE.Vector3(0, 1, 0);
-    [[-2.7, 1], [2.7, -1]].forEach(function(cfg, idx){
-      var hx = cfg[0];
-      var fixo = new THREE.Group();
-      fixo.position.set(hx, 3.5, 1.6);
-      scene.add(fixo);
-      var metal = new THREE.MeshStandardMaterial({color:0x1a2230, metalness:0.85, roughness:0.35});
-      var suporte = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.07, 0.5, 12), metal);
-      suporte.position.y = 0.25;
-      fixo.add(suporte);
-      var junta = new THREE.Mesh(new THREE.SphereGeometry(0.07, 14, 12), metal);
-      junta.position.y = -0.02;
-      fixo.add(junta);
-      var corpo = new THREE.Group();
-      corpo.position.y = -0.08;
-      corpo.rotation.x = 0.5;
-      corpo.rotation.y = -Math.sign(hx) * 0.35;
-      fixo.add(corpo);
-      var carcaca = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.25, 0.44, 24), metal);
-      carcaca.rotation.x = Math.PI / 2;
-      corpo.add(carcaca);
-      var aroLente = new THREE.Mesh(new THREE.TorusGeometry(0.16, 0.025, 10, 32), ciano);
-      aroLente.position.set(0, 0, 0.22);
-      corpo.add(aroLente);
-      var lente = new THREE.Mesh(new THREE.CircleGeometry(0.14, 24), new THREE.MeshBasicMaterial({color:0x444444}));
-      lente.position.set(0, 0, 0.225);
-      corpo.add(lente);
-      var spot = new THREE.SpotLight(0xffffff, 0, 10, 0.55, 0.45, 1.2);
-      spot.position.set(hx, 3.35, 1.6);
-      scene.add(spot);
-      scene.add(spot.target);
-      var feixeMat = new THREE.MeshBasicMaterial({color:0xfff8e8, transparent:true, opacity:0, blending:THREE.AdditiveBlending, depthWrite:false, side:THREE.DoubleSide});
-      var feixe = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.05, 1, 20, 1, true), feixeMat);
-      scene.add(feixe);
-      holofotes.push({spot:spot, feixe:feixe, lente:lente, origem:new THREE.Vector3(hx, 3.3, 1.6), fase:idx * Math.PI});
     });
     var N = 130, pos = new Float32Array(N * 3), vel = new Float32Array(N);
     for(var k = 0; k < N; k++){
@@ -725,20 +687,6 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
       viga.rotation.z = Math.sin(t * 0.9) * 0.04;
       pratos[0].rotation.z = -viga.rotation.z;
       pratos[1].rotation.z = -viga.rotation.z;
-      var acende = Math.min(1, t / 2.5);
-      holofotes.forEach(function(h){
-        var f = t * 0.7 + h.fase;
-        _alvo.set(Math.sin(f) * 1.5, 1.7 + Math.sin(t * 1.05 + h.fase) * 0.95, Math.cos(f * 0.8) * 1.3);
-        h.spot.target.position.copy(_alvo);
-        h.spot.intensity = 80 * acende * (0.75 + 0.25 * Math.sin(t * 2 + h.fase));
-        _dir.copy(_alvo).sub(h.origem);
-        var comp = _dir.length();
-        h.feixe.position.copy(h.origem).addScaledVector(_dir, 0.5);
-        h.feixe.scale.set(1, comp, 1);
-        h.feixe.quaternion.setFromUnitVectors(_cima, _dir.normalize());
-        h.feixe.material.opacity = 0.1 * acende;
-        h.lente.material.color.setScalar(0.27 + 0.73 * acende);
-      });
       var p = pg.attributes.position;
       for(var j = 0; j < N; j++){ var y = p.getY(j) + vel[j]; if(y > 3.5) y = 0; p.setY(j, y); }
       p.needsUpdate = true;
