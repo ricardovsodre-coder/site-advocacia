@@ -21,7 +21,7 @@ if(/(^|[?&])desktop=1(&|$)/.test(location.search)){try{sessionStorage.setItem('v
 try{if(sessionStorage.getItem('vs-desktop')==='1')return}catch(e){}
 var ua=navigator.userAgent||'';
 var isMobile=/Mobi|Android|iPhone|iPad|iPod|Tablet|Touch|IEMobile|Opera Mini/i.test(ua)||(navigator.maxTouchPoints>1&&/Macintosh/i.test(ua));
-if(isMobile){location.replace('mobile.html')} }catch(e){}})();
+if(isMobile){window.location.href = "mobile.html";} }catch(e){}})();
 </script>
 </head>
 <body>
