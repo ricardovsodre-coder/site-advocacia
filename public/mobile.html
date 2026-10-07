@@ -574,15 +574,18 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
     var perfil = [
       new THREE.Vector2(0.0, 0.0),
       new THREE.Vector2(0.95, 0.0),
-      new THREE.Vector2(1.0, 0.1),
-      new THREE.Vector2(0.55, 0.26),
-      new THREE.Vector2(0.34, 0.6),
-      new THREE.Vector2(0.26, 1.32),
-      new THREE.Vector2(0.3, 2.04),
-      new THREE.Vector2(0.42, 2.52),
-      new THREE.Vector2(0.3, 2.82),
-      new THREE.Vector2(0.42, 3.06),
-      new THREE.Vector2(0.2, 3.26),
+      new THREE.Vector2(1.0, 0.08),
+      new THREE.Vector2(0.55, 0.22),
+      new THREE.Vector2(0.34, 0.5),
+      new THREE.Vector2(0.26, 1.1),
+      new THREE.Vector2(0.24, 1.5),
+      new THREE.Vector2(0.33, 1.75),
+      new THREE.Vector2(0.24, 2.0),
+      new THREE.Vector2(0.3, 2.3),
+      new THREE.Vector2(0.42, 2.62),
+      new THREE.Vector2(0.3, 2.9),
+      new THREE.Vector2(0.42, 3.1),
+      new THREE.Vector2(0.2, 3.28),
       new THREE.Vector2(0.0, 3.34)
     ];
     root.add(new THREE.Mesh(new THREE.LatheGeometry(perfil, 48), vidro));
@@ -594,46 +597,75 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
       root.add(anel);
     });
     // florão + gema no topo
-    var flor = new THREE.Mesh(new THREE.SphereGeometry(0.15, 24, 18), vidro);
-    flor.position.set(0, 3.5, 0);
-    root.add(flor);
-    var gema = new THREE.Mesh(new THREE.SphereGeometry(0.07, 18, 14), ciano);
-    gema.position.set(0, 3.67, 0);
+    // botão torneado no topo
+    var broto = [
+      new THREE.Vector2(0.0, 3.34),
+      new THREE.Vector2(0.1, 3.36),
+      new THREE.Vector2(0.13, 3.46),
+      new THREE.Vector2(0.09, 3.6),
+      new THREE.Vector2(0.05, 3.7),
+      new THREE.Vector2(0.0, 3.78)
+    ];
+    root.add(new THREE.Mesh(new THREE.LatheGeometry(broto, 32), vidro));
+    var gema = new THREE.Mesh(new THREE.SphereGeometry(0.05, 16, 12), ciano);
+    gema.position.set(0, 3.68, 0);
     root.add(gema);
     // travessa em arco suave
+    // braços em voluta como o modelo
     var viga = new THREE.Group();
     viga.position.set(0, 3.34, 0);
     root.add(viga);
-    var arco = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(-1.9, -0.08, 0),
-      new THREE.Vector3(-0.9, 0.1, 0),
-      new THREE.Vector3(0, 0.16, 0),
-      new THREE.Vector3(0.9, 0.1, 0),
-      new THREE.Vector3(1.9, -0.08, 0)
-    ]);
-    viga.add(new THREE.Mesh(new THREE.TubeGeometry(arco, 40, 0.055, 12, false), vidro));
+    function braco(s){
+      var pts = [
+        new THREE.Vector3(0, 0.12, 0),
+        new THREE.Vector3(s * 0.55, 0.28, 0),
+        new THREE.Vector3(s * 1.05, 0.3, 0),
+        new THREE.Vector3(s * 1.45, 0.16, 0),
+        new THREE.Vector3(s * 1.72, -0.06, 0),
+        new THREE.Vector3(s * 1.86, -0.28, 0),
+        new THREE.Vector3(s * 1.8, -0.46, 0),
+        new THREE.Vector3(s * 1.64, -0.48, 0),
+        new THREE.Vector3(s * 1.56, -0.36, 0),
+        new THREE.Vector3(s * 1.6, -0.26, 0)
+      ];
+      viga.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 60, 0.05, 12, false), vidro));
+      var argola = new THREE.Mesh(new THREE.TorusGeometry(0.08, 0.022, 10, 24), ciano);
+      argola.position.set(s * 1.68, -0.36, 0);
+      viga.add(argola);
+      return new THREE.Vector3(s * 1.68, -0.4, 0);
+    }
+    var esq = braco(-1), dir = braco(1);
     // pingente em gota no centro
     var gota = new THREE.Mesh(new THREE.SphereGeometry(0.1, 20, 16), vidro);
     gota.scale.set(0.7, 1.25, 0.7);
     gota.position.set(0, -0.05, 0);
     viga.add(gota);
-    var argola = new THREE.Mesh(new THREE.TorusGeometry(0.09, 0.02, 10, 24), ciano);
-    argola.position.set(0, 0.12, 0);
-    viga.add(argola);
-    // pratos em concha com correntes triplas
+    var pingente = new THREE.Mesh(new THREE.TorusGeometry(0.09, 0.02, 10, 24), ciano);
+    pingente.position.set(0, 0.12, 0);
+    viga.add(pingente);
+    // pratos em concha com correntes de elos
     var pratos = [];
-    [-1.9, 1.9].forEach(function(x){
+    [[esq], [dir]].forEach(function(par){
+      var topo = par[0];
       var g = new THREE.Group();
-      g.position.set(x, -0.08, 0);
+      g.position.copy(topo);
       viga.add(g);
-      var topo = new THREE.Mesh(new THREE.SphereGeometry(0.06, 14, 12), ciano);
-      g.add(topo);
-      var correntes = new THREE.BufferGeometry().setFromPoints([
-        new THREE.Vector3(0, 0, 0), new THREE.Vector3(0.4, -1.7, 0.1),
-        new THREE.Vector3(0, 0, 0), new THREE.Vector3(-0.4, -1.7, -0.1),
-        new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, -1.8, 0)
-      ]);
-      g.add(new THREE.LineSegments(correntes, new THREE.LineBasicMaterial({color:0x9be9ff, transparent:true, opacity:0.85})));
+      var alvos = [
+        new THREE.Vector3(0.42, -1.62, 0.1),
+        new THREE.Vector3(-0.42, -1.62, -0.1),
+        new THREE.Vector3(0, -1.7, 0)
+      ];
+      alvos.forEach(function(alvo){
+        var passos = 12;
+        for(var li = 0; li <= passos; li++){
+          var p = new THREE.Vector3().lerpVectors(new THREE.Vector3(0, 0, 0), alvo, li / passos);
+          var elo = new THREE.Mesh(new THREE.TorusGeometry(0.042, 0.013, 8, 16), ciano);
+          elo.position.copy(p);
+          elo.rotation.y = (li % 2) * Math.PI / 2;
+          elo.rotation.x = 0.25;
+          g.add(elo);
+        }
+      });
       var concha = [
         new THREE.Vector2(0.0, 0.0),
         new THREE.Vector2(0.3, 0.02),
@@ -641,11 +673,11 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
         new THREE.Vector2(0.66, 0.22)
       ];
       var tigela = new THREE.Mesh(new THREE.LatheGeometry(concha, 44), vidro);
-      tigela.position.set(0, -2.0, 0);
+      tigela.position.set(0, -1.92, 0);
       g.add(tigela);
       var borda = new THREE.Mesh(new THREE.TorusGeometry(0.66, 0.024, 10, 48), ciano);
       borda.rotation.x = Math.PI / 2;
-      borda.position.set(0, -1.78, 0);
+      borda.position.set(0, -1.7, 0);
       g.add(borda);
       pratos.push(g);
     });
