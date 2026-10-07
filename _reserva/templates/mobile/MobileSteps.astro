@@ -1,0 +1,51 @@
+// templates/mobile/MobileSteps.astro — Passos "Como funciona" mobile
+---
+import { cn } from '@design-system/utils/cn';
+
+interface Props {
+  steps: Array<{
+    number: number;
+    title: string;
+    description: string;
+    icon: string;
+  }>;
+  class?: string;
+}
+
+const { steps, class: className } = Astro.props;
+---
+
+<section class={cn('px-4 py-10 bg-neutral-50', className)} aria-labelledby="mobile-steps-heading">
+  <div class="max-w-screen-xl mx-auto">
+    <header class="text-center mb-8">
+      <h2 id="mobile-steps-heading" class="text-xl font-bold text-neutral-900 mb-2">
+        Como funciona o atendimento
+      </h2>
+      <p class="text-neutral-600 text-sm">
+        Simples, transparente e sem burocracia
+      </p>
+    </header>
+
+    <div class="space-y-6" role="list" aria-label="Passos do atendimento">
+      {steps.map((step, index) => (
+        <article key={step.number} class="flex gap-4" role="listitem">
+          <div class="flex-shrink-0 relative">
+            <div class={cn(
+              'w-12 h-12 rounded-xl bg-primary-100 flex items-center justify-center text-primary-700 font-bold text-lg',
+              'relative z-10'
+            )} aria-hidden="true">
+              <span set:html={step.icon} />
+            </div>
+            {index < steps.length - 1 && (
+              <div class="absolute left-5 top-12 bottom-0 w-0.5 bg-primary-200" aria-hidden="true" />
+            )}
+          </div>
+          <div class="flex-1 pt-1">
+            <h3 class="font-semibold text-neutral-900 mb-1">{step.title}</h3>
+            <p class="text-neutral-600 text-sm">{step.description}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

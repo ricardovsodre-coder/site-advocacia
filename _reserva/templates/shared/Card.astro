@@ -1,0 +1,47 @@
+// templates/shared/Card.astro — Card Astro component
+---
+import { cn } from '@design-system/utils/cn';
+
+interface Props {
+  children: AstroSlotted;
+  variant?: 'default' | 'elevated' | 'outlined' | 'interactive';
+  padding?: 'none' | 'sm' | 'md' | 'lg';
+  hover?: boolean;
+  class?: string;
+}
+
+const {
+  children,
+  variant = 'default',
+  padding = 'md',
+  hover = false,
+  class: className,
+  ...attrs
+} = Astro.props;
+
+const baseStyles = 'rounded-xl transition-all duration-300 ease-power2-out';
+
+const variants = {
+  default: 'bg-white shadow-card',
+  elevated: 'bg-white shadow-card-elevated',
+  outlined: 'bg-white border border-neutral-200 shadow-sm',
+  interactive: 'bg-white shadow-card hover:shadow-card-hover cursor-pointer',
+};
+
+const paddings = {
+  none: '',
+  sm: 'p-4',
+  md: 'p-6',
+  lg: 'p-8',
+};
+---
+
+<div class={cn(baseStyles, variants[variant], paddings[padding], hover && 'hover:shadow-card-hover hover:-translate-y-0.5', className)} {...attrs}>
+  <slot />
+</div>
+
+<style>
+  :host {
+    display: block;
+  }
+</style>

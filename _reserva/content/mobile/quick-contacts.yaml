@@ -1,0 +1,34 @@
+quickContacts:
+  whatsapp:
+    label: "WhatsApp Sorocaba"
+    number: "15988033000"
+    href: "https://wa.me/5515988033000"
+    message: "Olá, Dr. Ricardo. Vim pelo site e gostaria de uma análise do meu caso trabalhista."
+  whatsappSP:
+    label: "WhatsApp São Paulo"
+    number: "11988233000"
+    href: "https://wa.me/5511988233000"
+    message: "Olá, Dr. Ricardo. Vim pelo site e gostaria de uma análise do meu caso trabalhista."
+  phone:
+    label: "Ligar Sorocaba"
+    number: "15988033000"
+    href: "tel:+5515988033000"
+  phoneSP:
+    label: "Ligar São Paulo"
+    number: "11988233000"
+    href: "tel:+5511988233000"
+  email:
+    label: "E-mail"
+    address: "escritorio@verissimosodre.com.br"
+    href: "mailto:escritorio@verissimosodre.com.br"
+    subject: "Análise de caso trabalhista - Site Veríssimo Sodré"
+  address:
+    label: "Endereço"
+    street: "Rua Vinte e Oito de Outubro, 215 - 26B"
+    neighborhood: "Alto da Boa Vista"
+    city: "Sorocaba"
+    state: "SP"
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Rua+Vinte+e+Oito+de+Outubro,+215+-+26B+-+Alto+da+Boa+Vista+-+Sorocaba-SP"
+  officeHours:
+    weekdays: "Segunda a Sexta: 9h às 18h"
+    saturday: "Sábado: 9h às 12h (agendamento)"

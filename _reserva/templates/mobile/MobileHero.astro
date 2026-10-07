@@ -1,0 +1,57 @@
+// templates/mobile/MobileHero.astro — Hero mobile curto e direto
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<section class={cn('relative px-4 py-10', className)} aria-labelledby="mobile-hero-heading">
+  <div class="max-w-screen-xl mx-auto text-center">
+    <h1 id="mobile-hero-heading" class="text-2xl md:text-3xl font-bold text-neutral-900 mb-3 leading-tight">
+      Seus direitos não podem esperar
+    </h1>
+    <p class="text-neutral-600 text-sm md:text-base mb-6 max-w-lg mx-auto">
+      Atuamos exclusivamente na defesa de empregados — renda até R$ 5k.
+      Sem custo inicial. Só recebemos se você ganhar.
+    </p>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+      <button
+        onclick="document.dispatchEvent(new CustomEvent('open-chat'))"
+        class="w-full sm:w-auto btn btn-primary"
+      >
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        Avaliação Gratuita
+      </button>
+      <a
+        href="https://wa.me/5515988033000"
+        class="w-full sm:w-auto btn btn-whatsapp"
+      >
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.864-2.03-.967-.273-.103-.472-.148-.67.152-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.48-1.653-1.68-.173-.2-.028-.318.15-.418.173-.099.347-.223.596-.424.247-.199.547-.471.596-.545.05-.077.027-.132-.025-.177-.1-.097-.27-.17-1.142-.68-.872-.51-1.805-1.21-2.218-1.472-.414-.26-.794-.497-1.249-.723-.454-.224-.93-.47-1.27-.6-.34-.13-.695-.264-.958-.264-.277 0-.512.13-.752.373-.237.24-.447.613-.488.83-.04.214-.09.407-.123.585-.04.184-.12.363-.19.527-.07.163-.744 1.872-.974 2.225-.23.352-.524.673-.594.836-.07.164-.284.433-.39.563-.11.13-.28.28-.413.38-.13.1-.277.21-.414.25-.138.04-.554.127-.894.08-.34-.047-.692-.137-1.07-.348-.38-.21-.76-.415-1.117-.653-.356-.237-.71-.482-1.03-.75-.32-.27-.63-.55-.906-.85-.28-.3-.51-.6-.74-.89-.23-.28-.41-.54-.54-.77-.13-.23-.22-.43-.28-.58-.06-.15-.08-.27-.08-.38 0-.13.08-.32.21-.48.13-.16.34-.34.52-.48.18-.14.41-.27.685-.41.274-.14.57-.275.873-.41.303-.135.57-.255.795-.347.225-.09.45-.19.65-.26.2-.07.398-.1.578-.12.18-.02.35-.04.5.01.16.05.305.08.44.03.14.03.28.01.41-.02.13-.11.27-.29.39-.18.12-.36.23-.55.32-.19.09-.38.18-.57.25-.19.07-.38.11-.57.14-.19.03-.48.05-.77.03-.29-.02-.57-.04-.85-.07-.28-.03-.54-.1-.8-.17-.26-.07-.51-.17-.75-.27-.24-.1-.47-.22-.69-.34-.22-.12-.43-.24-.63-.36-.2-.12-.39-.24-.56-.36-.17-.12-.33-.24-.47-.36-.14-.12-.26-.23-.37-.34-.11-.11-.2-.22-.28-.33-.08-.11-.15-.21-.2-.31-.05-.1-.08-.2-.08-.3 0-.1.03-.2.08-.3.05-.1.12-.19.2-.28.08-.09.17-.17.27-.25.1-.08.21-.15.32-.22.11-.07.22-.13.33-.19.11-.06.22-.11.33-.16.11-.05.22-.09.33-.13.11-.04.22-.07.33-.1.11-.03.22-.05.33-.08.11-.03.22-.05.33-.08.11-.03.22-.05.33-.08.11-.03.22-.05.33-.08.11-.03.22-.05.33-.08.11-.03.22-.05.33-.08"/></svg>
+        WhatsApp
+      </a>
+    </div>
+
+    {/* Trust badges */}
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-4 text-xs text-neutral-500" role="list" aria-label="Indicadores de confiança">
+      <div class="flex items-center gap-1" role="listitem">
+        <svg class="w-4 h-4 text-primary-600" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span>1.200+ casos</span>
+      </div>
+      <div class="flex items-center gap-1" role="listitem">
+        <svg class="w-4 h-4 text-primary-600" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span>92% favoráveis</span>
+      </div>
+      <div class="flex items-center gap-1" role="listitem">
+        <svg class="w-4 h-4 text-primary-600" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span>Atendimento 48h</span>
+      </div>
+      <div class="flex items-center gap-1" role="listitem">
+        <svg class="w-4 h-4 text-primary-600" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span>Sem custo inicial</span>
+      </div>
+    </div>
+  </div>
+</section>

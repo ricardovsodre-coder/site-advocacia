@@ -1,0 +1,35 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@design-system/*": ["design-system/*"],
+      "@templates/*": ["templates/*"],
+      "@content/*": ["content/*"],
+      "@api/*": ["api/*"],
+      "@generators/*": ["generators/*"],
+      "@scripts/*": ["scripts/*"]
+    },
+    "types": ["astro/client", "vite/client"]
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.astro",
+    "astro.config.*.mjs",
+    "vercel.json",
+    "tailwind.config.js"
+  ],
+  "exclude": ["node_modules", "dist", ".vercel"]
+}

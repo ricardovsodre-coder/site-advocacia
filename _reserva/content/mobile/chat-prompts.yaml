@@ -1,0 +1,50 @@
+chatPrompts:
+  - area: "verbas-rescisórias"
+    prompts:
+      - "Fui demitido sem justa causa. Quais verbas recebo?"
+      - "O patrão não pagou a rescisão no prazo de 10 dias. E agora?"
+      - "O que é a multa do artigo 477 da CLT?"
+      - "Como conferir se o TRCT está correto?"
+  - area: "horas-extras"
+    prompts:
+      - "Não me pagam horas extras há 6 meses. Como provar?"
+      - "O banco de horas da empresa é irregular. O que fazer?"
+      - "Suprimiram meu intervalo de almoço. Isso conta como hora extra?"
+      - "Como calcular o valor das horas extras com reflexos?"
+  - area: "assedio-moral"
+    prompts:
+      - "Meu chefe me humilha na frente de todos. Isso é assédio?"
+      - "Metas impossíveis e ameaças de demissão. Posso processar?"
+      - "Como provar assédio moral sem gravação?"
+      - "Posso pedir rescisão indireta por assédio?"
+  - area: "sem-registro"
+    prompts:
+      - "Trabalhei 2 anos sem carteira assinada. Tenho direito a FGTS?"
+      - "Como provar vínculo empregatício sem carteira assinada?"
+      - "Perco o PIS por trabalhar sem registro?"
+      - "O patrão paga em dinheiro sem recibo. Como provar?"
+  - area: "justa-causa"
+    prompts:
+      - "Fui demitido por justa causa por 1 atraso. Isso é legal?"
+      - "A justa causa foi por 'desídia' mas eu trabalhava normal. Como reverter?"
+      - "O patrão não me deu a carta de justa causa. O que fazer?"
+  - area: "insalubridade"
+    prompts:
+      - "Trabalho com ruído de 95dB. Tenho direito a insalubridade?"
+      - "Como pedir perícia para insalubridade?"
+      - "Posso receber insalubridade e periculosidade juntos?"
+  - area: "acidente-doenca"
+    prompts:
+      - "Sofri acidente de trabalho. A empresa não emitiu a CAT. O que faço?"
+      - "Voltei do INSS e a empresa me demitiu. Tenho estabilidade?"
+      - "Doença ocupacional (LER/DORT) dá direito a auxílio-acidente?"
+  - area: "rescisao-indireta"
+    prompts:
+      - "Salário atrasado há 3 meses. Posso sair com rescisão indireta?"
+      - "FGTS não depositado há 1 ano. Como provar?"
+      - "Posso continuar trabalhando enquanto processo a rescisão indireta?"
+  - area: "acordo-coletivo"
+    prompts:
+      - "Como saber qual convenção coletiva se aplica a mim?"
+      - "O patrão não paga o piso da categoria. O que fazer?"
+      - "A convenção coletiva garante PLR. Tenho direito?"

@@ -1,0 +1,44 @@
+// templates/mobile/MobileAreaChips.astro — Chips horizontais scrolláveis das 9 áreas
+---
+import { cn } from '@design-system/utils/cn';
+
+interface Props {
+  areas: Array<{
+    title: string;
+    icon: string;
+    href: string;
+  }>;
+  class?: string;
+}
+
+const { areas, class: className } = Astro.props;
+---
+
+<section class={cn('px-4 py-6', className)} aria-labelledby="mobile-areas-heading">
+  <div class="max-w-screen-xl mx-auto">
+    <header class="flex items-center justify-between mb-4">
+      <h2 id="mobile-areas-heading" class="text-lg font-semibold text-neutral-900">
+        O que a lei prevê para você
+      </h2>
+    </header>
+
+    <div class="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4" role="list" aria-label="Áreas de atuação">
+      {areas.map((area) => (
+        <a
+          key={area.title}
+          href={area.href}
+          class="flex-shrink-0 group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-neutral-200 text-neutral-700 text-sm font-medium hover:bg-primary-50 hover:border-primary-200 hover:text-primary-800 transition-all duration-200"
+          role="listitem"
+        >
+          <span class="w-8 h-8 rounded-full bg-primary-50 flex items-center justify-center text-primary-600 group-hover:bg-primary-100 group-hover:text-primary-700 transition-colors" aria-hidden="true">
+            <span set:html={area.icon} />
+          </span>
+          <span class="font-medium">{area.title}</span>
+          <svg class="w-4 h-4 text-neutral-300 group-hover:text-primary-400 transition-colors opacity-0 group-hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

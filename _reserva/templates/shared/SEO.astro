@@ -1,0 +1,65 @@
+// templates/shared/SEO.astro — SEO component reutilizável
+---
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  twitterCard?: 'summary_large_image' | 'summary';
+  jsonLd?: Record<string, any>;
+  noindex?: boolean;
+  nofollow?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage = '/og-default.jpg',
+  ogType = 'website',
+  twitterCard = 'summary_large_image',
+  jsonLd,
+  noindex = false,
+  nofollow = false,
+} = Astro.props;
+
+const siteUrl = 'https://verissimosodre.com.br';
+const fullCanonical = canonical ? `${siteUrl}${canonical}` : siteUrl;
+const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+---
+
+<!-- Meta tags essenciais -->
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={fullCanonical} />
+<meta name="robots" content={noindex ? 'noindex' : 'index'} {nofollow ? ', nofollow' : ''} />
+
+<!-- Open Graph -->
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={fullCanonical} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={fullOgImage} />
+<meta property="og:site_name" content="Veríssimo Sodré Advocacia" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content={twitterCard} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={fullOgImage} />
+
+<!-- JSON-LD -->
+{jsonLd && (
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+)}
+
+<!-- Favicon / Icons -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/manifest.json" />
+
+<!-- Preconnect para performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://vercel.live" crossorigin />

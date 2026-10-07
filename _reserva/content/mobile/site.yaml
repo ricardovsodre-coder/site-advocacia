@@ -1,0 +1,57 @@
+# Mobile site configuration
+site:
+  name: "Veríssimo Sodré"
+  tagline: "Advocacia Trabalhista"
+  description: "Seus direitos não podem esperar. Advogado trabalhista para empregados (renda ≤ R$ 5k)."
+  url: "https://verissimosodre.com.br/mobile.html"
+  ogImage: "/og-mobile.jpg"
+  locale: "pt-BR"
+
+company:
+  name: "Veríssimo Sodré"
+  lawyer: "Dr. Ricardo Veríssimo Sodré"
+  oab: "OAB/SP 441.049"
+  email: "escritorio@verissimosodre.com.br"
+  phones:
+    - label: "São Paulo"
+      number: "11988233000"
+      formatted: "(11) 98823-3000"
+    - label: "Sorocaba"
+      number: "15988033000"
+      formatted: "(15) 98803-3000"
+  address:
+    street: "Rua Vinte e Oito de Outubro, 215 - 26B"
+    neighborhood: "Alto da Boa Vista"
+    city: "Sorocaba"
+    state: "SP"
+    cep: "18050-000"
+    mapsUrl: "https://www.google.com/maps/search/?api=1&query=Rua+Vinte+e+Oito+de+Outubro,+215+-+26B+-+Alto+da+Boa+Vista+-+Sorocaba-SP"
+
+hero:
+  title: "Seus direitos não podem esperar"
+  subtitle: "Advogado trabalhista para empregados (renda ≤ R$ 5k). Sem custo inicial. Só recebemos se você ganhar."
+  ctaPrimary:
+    label: "Avaliação Gratuita"
+    action: "open-chat"
+  ctaSecondary:
+    label: "WhatsApp"
+    href: "https://wa.me/5515988033000"
+
+features:
+  chatIA: true
+  googleAuth: true
+  rateLimit: 5
+  bottomBar: true
+  areaChips: true
+  steps: true
+  faq: true
+
+seo:
+  title: "Advogado Trabalhista | Veríssimo Sodré"
+  description: "Seus direitos trabalhistas não podem esperar. Atendemos empregados (renda ≤ R$ 5k) em Sorocaba, SP e todo Brasil online. IA + WhatsApp."
+  keywords: ["advogado trabalhista", "verbas rescisórias", "horas extras", "assédio", "Sorocaba", "online"]
+
+social:
+  linkedin: ""
+  instagram: ""
+  facebook: ""

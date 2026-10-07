@@ -1,0 +1,68 @@
+// templates/mobile/MobileFAQ.astro — FAQ mobile (accordion nativo <details>)
+---
+import { cn } from '@design-system/utils/cn';
+
+interface Props {
+  faqs: Array<{
+    question: string;
+    answer: string;
+    category?: string;
+  }>;
+  class?: string;
+}
+
+const { faqs, class: className } = Astro.props;
+---
+
+<section class={cn('px-4 py-10', className)} aria-labelledby="mobile-faq-heading">
+  <div class="max-w-screen-xl mx-auto">
+    <header class="text-center mb-8">
+      <h2 id="mobile-faq-heading" class="text-xl font-bold text-neutral-900 mb-2">
+        Perguntas frequentes
+      </h2>
+      <p class="text-neutral-600 text-sm">
+        Respostas rápidas para as dúvidas mais comuns
+      </p>
+    </header>
+
+    <dl class="space-y-3" role="list" aria-label="Perguntas frequentes">
+      {faqs.map((faq) => (
+        <div key={faq.question} class="bg-white border border-neutral-200 rounded-lg overflow-hidden" role="listitem">
+          <dt>
+            <details class="group">
+              <summary class="flex items-center justify-between p-4 cursor-pointer list-none">
+                <span class="font-medium text-neutral-900 pr-4">{faq.question}</span>
+                <svg class="w-5 h-5 text-neutral-400 group-open:rotate-180 transition-transform duration-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <dd class="px-4 pb-4 pt-0 text-neutral-600 text-sm leading-relaxed animate-slide-down">
+                {faq.answer}
+              </dd>
+            </details>
+          </dt>
+        </div>
+      ))}
+    </dl>
+
+    <div class="text-center mt-8">
+      <a href="/faq" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium border-2 border-primary-800 text-primary-800 hover:bg-primary-50 transition-colors">
+        Ver todas as perguntas
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  details summary::-webkit-details-marker { display: none; }
+  details summary::marker { display: none; }
+  details[open] summary { border-bottom: 1px solid #e5e5e5; }
+  @keyframes slide-down {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-slide-down { animation: slide-down 200ms ease-out; }
+</style>

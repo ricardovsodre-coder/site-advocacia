@@ -1,0 +1,106 @@
+// templates/desktop/DesktopHero3D.astro — Hero com logo 3D animado (R3F)
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+  ctaPrimary?: { label: string; href: string };
+  ctaSecondary?: { label: string; href: string };
+  class?: string;
+}
+
+const {
+  title = 'Seus direitos não podem esperar.',
+  subtitle = 'Atuamos exclusivamente na defesa de empregados — renda até R$ 5k. Sem custo inicial. Só recebemos se você ganhar.',
+  ctaPrimary = { label: 'Avaliação Gratuita', href: '#chat' },
+  ctaSecondary = { label: 'Entenda seus direitos', href: '/areas' },
+  class: className,
+} = Astro.props;
+---
+
+<section class={cn('relative min-h-screen flex items-center justify-center overflow-hidden', className)}>
+  {/* Background 3D Canvas */}
+  <div class="absolute inset-0" id="hero-canvas" aria-hidden="true"></div>
+
+  {/* Gradient overlay */}
+  <div class="absolute inset-0 bg-gradient-to-b from-primary-900/10 via-transparent to-transparent" />
+
+  {/* Floating particles */}
+  <div class="absolute inset-0" id="particles" aria-hidden="true"></div>
+
+  {/* Content */}
+  <div class="relative z-10 max-w-5xl mx-auto px-6 py-24 text-center">
+    <div class="max-w-3xl mx-auto">
+      {/* Logo 3D animado */}
+      <div class="mb-10" id="logo-3d" aria-label="Logo Veríssimo Sodré">
+        <div class="inline-block relative">
+          <svg class="w-24 h-24 text-primary-800" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+          <div class="absolute inset-0 -top-4 -left-4 bg-gradient-to-r from-primary-500/20 to-accent-500/20 rounded-full blur-3xl animate-pulse" />
+        </div>
+      </div>
+
+      <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-900 mb-6 leading-tight animate-text-reveal">
+        {title}
+      </h1>
+
+      <p class="text-lg md:text-xl text-neutral-600 mb-10 max-w-2xl mx-auto animate-slide-up" style="animation-delay: 100ms;">
+        {subtitle}
+      </p>
+
+      {/* Trust indicators */}
+      <div class="flex flex-wrap items-center justify-center gap-8 mb-10 animate-slide-up" style="animation-delay: 200ms;" role="list" aria-label="Indicadores de confiança">
+        <div class="flex items-center gap-2 text-neutral-600" role="listitem">
+          <svg class="w-5 h-5 text-primary-600" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span>1.200+ casos encerrados</span>
+        </div>
+        <div class="flex items-center gap-2 text-neutral-600" role="listitem">
+          <svg class="w-5 h-5 text-primary-600" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span>92% acordos favoráveis</span>
+        </div>
+        <div class="flex items-center gap-2 text-neutral-600" role="listitem">
+          <svg class="w-5 h-5 text-primary-600" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span>Atendimento em 48h</span>
+        </div>
+        <div class="flex items-center gap-2 text-neutral-600" role="listitem">
+          <svg class="w-5 h-5 text-primary-600" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span>Sem honorários adiantados</span>
+        </div>
+      </div>
+
+      {/* CTAs */}
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up" style="animation-delay: 300ms;">
+        <a
+          href={ctaPrimary.href}
+          class="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg text-lg font-semibold bg-primary-800 text-white hover:bg-primary-700 transition-colors shadow-button focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+        >
+          {ctaPrimary.label}
+          <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
+        <a
+          href={ctaSecondary.href}
+          class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg text-lg font-semibold border-2 border-primary-800 text-primary-800 hover:bg-primary-50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+        >
+          {ctaSecondary.label}
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </a>
+      </div>
+
+      {/* Scroll indicator */}
+      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce" aria-hidden="true">
+        <svg class="w-6 h-6 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  // Inicializa Three.js logo 3D e particles
+  // Carregado como island React (client:visible)
+</script>

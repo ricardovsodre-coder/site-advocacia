@@ -1,0 +1,54 @@
+# LICENSE
+
+## Uso Interno — Veríssimo Sodré Advocacia Trabalhista
+
+Este projeto é de uso **exclusivo e interno** do escritório **Veríssimo Sodré Advocacia Trabalhista**.
+
+### Permissões
+- ✅ Uso interno pelo escritório
+- ✅ Modificação e extensão pelo time técnico
+- ✅ Deploy em produção (verissimosodre.com.br)
+- ✅ Backup e versionamento
+
+### Restrições
+- ❌ Redistribuição (código, design, conteúdo)
+- ❌ Uso por terceiros não autorizados
+- ❌ Criação de obras derivadas para terceiros
+- ❌ Venda ou licenciamento
+
+### Conteúdo Jurídico
+O conteúdo jurídico (artigos, FAQ, áreas, landing pages) é de **autoria exclusiva** do escritório Veríssimo Sodré e protegido por direitos autorais.
+
+### Código Fonte
+O código fonte (Astro, React, TypeScript, CSS, scripts) é **propriedade intelectual** do escritório Veríssimo Sodré.
+
+### Assets
+- Logo, fontes, cores: propriedade do escritório
+- Fotos da equipe: direitos de imagem autorizados
+- Ícones: Lucide (MIT License) + customizados
+
+### Dependências de Terceiros
+Este projeto usa bibliotecas open-source sob suas respectivas licenças:
+- Astro (MIT)
+- React (MIT)
+- Tailwind CSS (MIT)
+- GSAP (Standard License - gratuito para uso não-comercial/comercial até certo limite)
+- React Three Fiber (MIT)
+- @vercel/kv (MIT)
+- @google/generative-ai (Apache 2.0)
+- Lucide React (ISC)
+- Radix UI (MIT)
+- Zod (MIT)
+- date-fns (MIT)
+- Contentlayer (MIT)
+
+### Contato
+Para dúvidas sobre licenciamento: **escritorio@verissimosodre.com.br**
+
+---
+
+**Veríssimo Sodré Advocacia Trabalhista**  
+Dr. Ricardo Veríssimo Sodré — OAB/SP 441.049  
+Rua Vinte e Oito de Outubro, 215 - 26B - Alto da Boa Vista - Sorocaba/SP  
+(15) 98803-3000 | (11) 98823-3000  
+https://verissimosodre.com.br

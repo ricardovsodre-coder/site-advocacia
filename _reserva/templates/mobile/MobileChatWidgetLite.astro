@@ -1,0 +1,60 @@
+// templates/mobile/MobileChatWidgetLite.astro — Chat widget leve (lazy loaded)
+---
+import ChatWidget from '@design-system/components/ChatWidget/ChatWidget';
+import { cn } from '@design-system/utils/cn';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class={cn('fixed bottom-6 right-4 z-50', className)}>
+  {/* Trigger button */}
+  <button
+    id="chat-trigger"
+    class="w-12 h-12 rounded-full bg-gradient-to-br from-primary-900 to-primary-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+    aria-label="Abrir chat com IA"
+    aria-expanded="false"
+    onclick="document.dispatchEvent(new CustomEvent('open-chat'))"
+  >
+    <svg class="w-6 h-6 text-white mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+    </svg>
+    <span class="absolute -top-0.5 -right-0.5 w-4 h-4 bg-[#25D366] text-white text-[10px] font-bold rounded-full flex items-center justify-center" aria-label="5 perguntas disponíveis">5</span>
+  </button>
+
+  {/* Chat Widget (React Island - lazy loaded) */}
+  <ChatWidget
+    client:idle
+    isOpen={false}
+    onClose={() => {}}
+    onLogin={() => window.location.href = '/api/auth/google?state=mobile'}
+    variant="mobile"
+    areaChips={[
+      'Verbas rescisórias', 'Horas extras', 'Assédio moral',
+      'Sem registro', 'Justa causa', 'Insalubridade',
+      'Acidente/doença', 'Rescisão indireta', 'Acordo coletivo'
+    ]}
+  />
+</div>
+
+<script is:inline>
+  // Sync trigger button with chat state
+  window.addEventListener('chat-open', () => {
+    const trigger = document.getElementById('chat-trigger');
+    if (trigger) {
+      trigger.setAttribute('aria-expanded', 'true');
+      trigger.style.display = 'none';
+    }
+  });
+
+  window.addEventListener('chat-close', () => {
+    const trigger = document.getElementById('chat-trigger');
+    if (trigger) {
+      trigger.setAttribute('aria-expanded', 'false');
+      trigger.style.display = 'flex';
+    }
+  });
+</script>

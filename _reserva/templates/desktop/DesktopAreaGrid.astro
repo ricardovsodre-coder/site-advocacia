@@ -1,0 +1,58 @@
+// templates/desktop/DesktopAreaGrid.astro — Grid de áreas desktop (3 colunas + hover 3D)
+---
+import AreaCard from '../shared/AreaCard.astro';
+import { cn } from '@design-system/utils/cn';
+
+interface Props {
+  areas: Array<{
+    title: string;
+    description: string;
+    icon: string;
+    href: string;
+    deadline?: string;
+    number: string;
+  }>;
+  class?: string;
+}
+
+const { areas, class: className } = Astro.props;
+---
+
+<section class={cn('py-20 lg:py-28', className)} aria-labelledby="areas-heading">
+  <div class="max-w-7xl mx-auto px-6">
+    <header class="text-center mb-16">
+      <h2 id="areas-heading" class="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
+        Nove situações comuns e o que a lei prevê em cada uma
+      </h2>
+      <p class="text-lg text-neutral-600 max-w-2xl mx-auto">
+        Direito trabalhista não é letra morta: cada situação abaixo tem regras claras na CLT.
+        Entenda a sua antes de decidir qualquer coisa.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="list" aria-label="Áreas de atuação">
+      {areas.map((area) => (
+        <AreaCard
+          title={area.title}
+          description={area.description}
+          icon={area.icon}
+          href={area.href}
+          deadline={area.deadline}
+          number={area.number}
+          variant="desktop"
+          class="group relative"
+          role="listitem"
+        />
+      ))}
+    </div>
+
+    <div class="text-center mt-12">
+      <a href="/areas" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-base font-medium border-2 border-primary-800 text-primary-800 hover:bg-primary-50 transition-colors">
+        Ver todas as áreas
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

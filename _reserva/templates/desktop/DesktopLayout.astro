@@ -1,0 +1,144 @@
+// templates/desktop/DesktopLayout.astro — Layout base desktop
+---
+import SEO from '../shared/SEO.astro';
+import Header from '@design-system/components/Header/Header';
+import Footer from '@design-system/components/Footer/Footer';
+import ChatWidget from '@design-system/components/ChatWidget/ChatWidget';
+import { cn } from '@design-system/utils/cn';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  jsonLd?: Record<string, any>;
+  children: AstroSlotted;
+  class?: string;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage,
+  jsonLd,
+  children,
+  class: className,
+} = Astro.props;
+
+const siteConfig = {
+  companyName: 'Veríssimo Sodré',
+  oab: 'Dr. Ricardo Sodré · OAB/SP 441.049',
+  email: 'escritorio@verissimosodre.com.br',
+  phones: [
+    { label: 'São Paulo', number: '11988233000' },
+    { label: 'Sorocaba', number: '15988033000' },
+  ],
+  address: {
+    street: 'Rua Vinte e Oito de Outubro, 215 - 26B',
+    neighborhood: 'Alto da Boa Vista',
+    city: 'Sorocaba',
+    state: 'SP',
+    mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Rua+Vinte+e+Oito+de+Outubro,+215+-+26B+-+Alto+da+Boa+Vista+-+Sorocaba-SP',
+  },
+};
+
+const navigation = [
+  { label: 'Início', href: '/' },
+  { label: 'Áreas de Atuação', href: '/areas' },
+  { label: 'Como Atuamos', href: '/como-atuamos' },
+  { label: 'Artigos', href: '/artigos' },
+  { label: 'Equipe', href: '/equipe' },
+  { label: 'Contato', href: '/contato' },
+];
+
+const ctaPrimary = { label: 'Avaliação Gratuita', href: '#chat', onClick: () => document.dispatchEvent(new CustomEvent('open-chat')) };
+const ctaSecondary = { label: 'WhatsApp', href: 'https://wa.me/5515988033000' };
+---
+
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1e3a8a" />
+    <link rel="preload" as="font" href="/fonts/inter-var.woff2" crossorigin />
+    <link rel="preload" as="font" href="/fonts/your-heading-font.woff2" crossorigin />
+    <SEO
+      title={title}
+      description={description}
+      canonical={canonical}
+      ogImage={ogImage}
+      jsonLd={jsonLd}
+    />
+  </head>
+  <body class="font-sans antialiased bg-white text-neutral-900">
+    <!-- Skip link para acessibilidade -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 px-4 py-2 bg-primary-800 text-white rounded-lg">
+      Pular para o conteúdo principal
+    </a>
+
+    <!-- Header -->
+    <Header
+      logo={<svg class="w-full h-full text-primary-800" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>}
+      navigation={navigation}
+      ctaPrimary={ctaPrimary}
+      ctaSecondary={ctaSecondary}
+      variant="desktop"
+    />
+
+    <!-- Main Content -->
+    <main id="main-content" class="pt-16 min-h-screen" role="main">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <Footer
+      logo={<svg class="w-full h-full text-primary-800" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>}
+      companyName={siteConfig.companyName}
+      oab={siteConfig.oab}
+      email={siteConfig.email}
+      phones={siteConfig.phones}
+      address={siteConfig.address}
+      variant="desktop"
+    />
+
+    <!-- Chat Widget -->
+    <ChatWidget
+      isOpen={false}
+      onClose={() => document.dispatchEvent(new CustomEvent('close-chat'))}
+      onLogin={() => window.location.href = '/api/auth/google?state=desktop'}
+      variant="desktop"
+      areaChips={[
+        'Verbas rescisórias', 'Horas extras', 'Assédio moral',
+        'Sem registro', 'Justa causa', 'Insalubridade',
+        'Acidente/doença', 'Rescisão indireta', 'Acordo coletivo'
+      ]}
+    />
+
+    <!-- Scripts globais -->
+    <script is:inline>
+      // Event listeners globais para chat
+      document.addEventListener('open-chat', () => {
+        const event = new CustomEvent('chat-open');
+        window.dispatchEvent(event);
+      });
+
+      document.addEventListener('close-chat', () => {
+        const event = new CustomEvent('chat-close');
+        window.dispatchEvent(event);
+      });
+
+      // Smooth scroll para links internos
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

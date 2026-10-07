@@ -1,0 +1,90 @@
+// templates/shared/AreaCard.astro — Card de área reutilizável (desktop + mobile)
+---
+import { cn } from '@design-system/utils/cn';
+
+interface Props {
+  title: string;
+  description: string;
+  icon: string; // SVG string ou componente
+  href: string;
+  deadline?: string;
+  variant?: 'desktop' | 'mobile';
+  number?: string; // "01", "02", etc.
+  class?: string;
+}
+
+const {
+  title,
+  description,
+  icon,
+  href,
+  deadline,
+  variant = 'desktop',
+  number,
+  class: className,
+} = Astro.props;
+
+const isMobile = variant === 'mobile';
+---
+
+<a href={href} class={cn(
+  'group relative rounded-xl bg-white border border-neutral-100',
+  'transition-all duration-300 ease-power2-out',
+  'hover:shadow-card-hover hover:-translate-y-0.5 hover:border-primary-200',
+  'focus:outline-none focus:ring-2 focus:ring-primary-500',
+  isMobile ? 'p-4 flex flex-col' : 'p-6 flex flex-col h-full',
+  className
+)}>
+  {number && (
+    <span class="absolute -top-3 -right-3 w-8 h-8 bg-primary-100 text-primary-700 rounded-full text-xs font-bold flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+      {number}
+    </span>
+  )}
+
+  <div class={cn(
+    'w-12 h-12 rounded-lg bg-primary-50 flex items-center justify-center mb-4',
+    isMobile && 'w-10 h-10 mb-3'
+  )} aria-hidden="true">
+    <span class="text-primary-600" set:html={icon} />
+  </div>
+
+  <h3 class={cn(
+    'font-semibold text-neutral-900 mb-2',
+    isMobile ? 'text-base' : 'text-lg'
+  )}>
+    {title}
+  </h3>
+
+  <p class={cn(
+    'text-neutral-600 leading-relaxed flex-1',
+    isMobile ? 'text-sm mb-3' : 'text-base mb-4'
+  )}>
+    {description}
+  </p>
+
+  {deadline && (
+    <div class="mt-auto pt-3 border-t border-neutral-100">
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-warning-50 text-warning-700">
+        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        {deadline}
+      </span>
+    </div>
+  )}
+
+  <div class="mt-4 flex items-center justify-between">
+    <span class={cn('text-sm font-medium text-primary-600', isMobile && 'text-xs')}>
+      Saiba mais
+    </span>
+    <svg class="w-5 h-5 text-primary-400 group-hover:text-primary-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+    </svg>
+  </div>
+</a>
+
+<style>
+  :host {
+    display: block;
+  }
+</style>
