@@ -50,19 +50,7 @@
     });
   });
 
-  // === FAQ ACCORDION ===
-  document.querySelectorAll('.faq-item').forEach(function(item) {
-    var summary = item.querySelector('summary');
-    if (summary) {
-      summary.addEventListener('click', function() {
-        var open = item.open;
-        document.querySelectorAll('.faq-item').forEach(function(other) {
-          if (other !== item) other.open = false;
-        });
-        item.open = !open;
-      });
-    }
-  });
+  // === FAQ ACCORDION (nativo: <details> abre a janela de resposta abaixo, igual ao mobile) ===
 
   // === SCROLL TO TOP ===
   var scrollTop = document.getElementById('scrollTop');
