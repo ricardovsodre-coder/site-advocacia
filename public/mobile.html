@@ -602,8 +602,8 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
     var ciano = new THREE.MeshStandardMaterial({color:0x00c8ff, emissive:0x00c8ff, emissiveIntensity:1.6, roughness:0.4});
 
     var root = new THREE.Group();
-    root.scale.setScalar(0.78);
-    root.position.y = -0.35;
+    root.scale.setScalar(0.94);
+    root.position.y = -0.65;
     scene.add(root);
     // coluna torneada em curvas
     var perfil = [
@@ -756,7 +756,7 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
       if(!visivel) return;
       var t = relogio.getElapsedTime();
       root.rotation.y = t * 0.32;
-      root.position.y = -0.35 + Math.sin(t * 0.8) * 0.03;
+      root.position.y = -0.65 + Math.sin(t * 0.8) * 0.03;
       viga.rotation.z = Math.sin(t * 0.9) * 0.04;
       pratos[0].rotation.z = -viga.rotation.z;
       pratos[1].rotation.z = -viga.rotation.z;
