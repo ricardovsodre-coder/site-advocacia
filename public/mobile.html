@@ -567,27 +567,27 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
     var ciano = new THREE.MeshStandardMaterial({color:0x00c8ff, emissive:0x00c8ff, emissiveIntensity:1.6, roughness:0.4});
 
     var root = new THREE.Group();
-    root.scale.setScalar(0.85);
+    root.scale.setScalar(0.78);
     root.position.y = -0.35;
     scene.add(root);
     // coluna torneada em curvas
     var perfil = [
       new THREE.Vector2(0.0, 0.0),
       new THREE.Vector2(0.95, 0.0),
-      new THREE.Vector2(1.0, 0.08),
-      new THREE.Vector2(0.55, 0.22),
-      new THREE.Vector2(0.34, 0.5),
-      new THREE.Vector2(0.26, 1.1),
-      new THREE.Vector2(0.3, 1.7),
-      new THREE.Vector2(0.42, 2.1),
-      new THREE.Vector2(0.3, 2.35),
-      new THREE.Vector2(0.42, 2.55),
-      new THREE.Vector2(0.2, 2.72),
-      new THREE.Vector2(0.0, 2.78)
+      new THREE.Vector2(1.0, 0.1),
+      new THREE.Vector2(0.55, 0.26),
+      new THREE.Vector2(0.34, 0.6),
+      new THREE.Vector2(0.26, 1.32),
+      new THREE.Vector2(0.3, 2.04),
+      new THREE.Vector2(0.42, 2.52),
+      new THREE.Vector2(0.3, 2.82),
+      new THREE.Vector2(0.42, 3.06),
+      new THREE.Vector2(0.2, 3.26),
+      new THREE.Vector2(0.0, 3.34)
     ];
     root.add(new THREE.Mesh(new THREE.LatheGeometry(perfil, 48), vidro));
     // anéis decorativos no fuste
-    [[1.02, 0.1], [0.4, 1.35], [0.44, 2.12]].forEach(function(a){
+    [[1.02, 0.12], [0.4, 1.62], [0.44, 2.54]].forEach(function(a){
       var anel = new THREE.Mesh(new THREE.TorusGeometry(a[0], 0.03, 10, 64), ciano);
       anel.rotation.x = Math.PI / 2;
       anel.position.y = a[1];
@@ -595,14 +595,14 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
     });
     // florão + gema no topo
     var flor = new THREE.Mesh(new THREE.SphereGeometry(0.15, 24, 18), vidro);
-    flor.position.set(0, 2.92, 0);
+    flor.position.set(0, 3.5, 0);
     root.add(flor);
     var gema = new THREE.Mesh(new THREE.SphereGeometry(0.07, 18, 14), ciano);
-    gema.position.set(0, 3.06, 0);
+    gema.position.set(0, 3.67, 0);
     root.add(gema);
     // travessa em arco suave
     var viga = new THREE.Group();
-    viga.position.set(0, 2.78, 0);
+    viga.position.set(0, 3.34, 0);
     root.add(viga);
     var arco = new THREE.CatmullRomCurve3([
       new THREE.Vector3(-1.9, -0.08, 0),
