@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="style.css">
 <script>
 // Redirecionamento inteligente: celular/tablet -> mobile.html (?desktop=1 desativa)
 (function(){try{
@@ -45,8 +45,6 @@ if(isMobile){window.location.href = "mobile.html";} }catch(e){}})();
     <nav class="nav" id="nav">
       <a href="#areas" class="nav-link">Áreas</a>
       <a href="#artigos" class="nav-link">Artigos</a>
-      <a href="#equipe" class="nav-link">Equipe</a>
-      <a href="#cases" class="nav-link">Cases</a>
       <a href="#faq" class="nav-link">FAQ</a>
       <a href="#contato" class="nav-cta">Fale Conosco</a>
     </nav>
@@ -58,34 +56,36 @@ if(isMobile){window.location.href = "mobile.html";} }catch(e){}})();
 
 <main>
 
-<!-- HERO com 3D -->
+<!-- HERO -->
 <section class="hero" id="hero">
-  <div id="hero-canvas" style="position:absolute;inset:0;z-index:0"></div>
-  <div class="hero-content container">
-    <div class="hero-badge">📍 Sorocaba · São Paulo · Todo Brasil Online</div>
-    <h1 class="hero-title">
-      Seu <span class="highlight">direito trabalhista</span>,<br>
-      protegido por quem <span class="highlight">entrega resultado</span>.
-    </h1>
-    <p class="hero-subtitle">
-      Advogado trabalhista do lado do empregado. Renda até R$ 5.000/mês.<br>
-      Horas extras, assédio, sem registro, verbas rescisórias, justa causa, insalubridade.
-    </p>
-    <div class="hero-actions">
-      <a href="#contato" class="btn btn-primary btn-lg">💬 Pergunte à IA (grátis)</a>
-      <a href="https://wa.me/5515988033000" class="btn btn-whatsapp btn-lg">📱 WhatsApp</a>
+  <div class="container hero-grid">
+    <div class="hero-left">
+      <div class="hero-badge">📍 Sorocaba, São Paulo, e toda região</div>
+      <h1 class="hero-title">
+        Advogado <span class="highlight">Trabalhista</span>: entenda o que a lei prevê para o <span class="highlight">seu caso</span>.
+      </h1>
+      <p class="hero-subtitle">
+        Advogado trabalhista do lado do empregado.<br>
+        Horas extras, assédio, sem registro, verbas rescisórias, justa causa, insalubridade.
+      </p>
+      <div class="hero-actions">
+        <a href="https://wa.me/5515988033000?text=Ol%C3%A1%2C%20Dr.%20Ricardo!%20Quero%20falar%20com%20um%20advogado%20especialista." class="btn btn-primary btn-lg">💬 Falar com Advogado Especialista no WhatsApp</a>
+        <a href="#areas" class="btn btn-outline btn-lg">Ver áreas de atuação ↓</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><strong>9</strong> áreas de atuação</div>
+        <div class="stat"><strong>5</strong> perguntas/dia grátis</div>
+        <div class="stat"><strong>100%</strong> foco no empregado</div>
+      </div>
     </div>
-    <div class="hero-stats">
-      <div class="stat"><strong>9</strong> áreas de atuação</div>
-      <div class="stat"><strong>5</strong> perguntas/dia grátis</div>
-      <div class="stat"><strong>100%</strong> foco no empregado</div>
+    <div class="hero-visual">
+      <div class="hero-3d-placeholder" id="espaco-3d" data-3d="tabua-da-lei">
+        <div class="hero-3d-inner">
+          <strong>🏛️ Espaço 3D Interativo</strong>
+          Aqui será embutida a Tábua da Lei 3D.
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="hero-scroll">
-    <a href="#areas" style="color:var(--gray-dark);font-size:.75rem;display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none">
-      <span>SCROLL</span>
-      <span style="animation:bounce 2s infinite">⬇</span>
-    </a>
   </div>
 </section>
 
@@ -247,59 +247,6 @@ if(isMobile){window.location.href = "mobile.html";} }catch(e){}})();
   </div>
 </section>
 
-<!-- EQUIPA -->
-<section class="section" id="equipe">
-  <div class="container">
-    <div class="section-label">EQUIPE</div>
-    <h2 class="section-title">Quem <span class="highlight">defende</span> você.</h2>
-    <div class="team-grid">
-      <div class="team-card">
-        <div class="team-photo">👨‍⚖️</div>
-        <h3>Dr. Ricardo Veríssimo Sodré</h3>
-        <p class="team-role">OAB/SP 441.049 — Sócio Fundador</p>
-        <p class="team-focus">Contencioso estratégico, rescisões complexas, assédio moral, acidentes</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo">👩‍⚖️</div>
-        <h3>Dra. Amanda Ferreira Lopes</h3>
-        <p class="team-role">OAB/SP 487.213 — Advogada Associada</p>
-        <p class="team-focus">Horas extras, banco de horas, intervalo intrajornada, jornada 12x36</p>
-      </div>
-      <div class="team-card">
-        <div class="team-photo">👨‍⚖️</div>
-        <h3>Dr. Bruno Henrique Silva</h3>
-        <p class="team-role">OAB/SP 512.847 — Advogado Associado</p>
-        <p class="team-focus">Assédio moral, rescisão indireta, acidentes, negociação coletiva</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CASES -->
-<section class="section section-alt" id="cases">
-  <div class="container">
-    <div class="section-label">RESULTADOS</div>
-    <h2 class="section-title">Casos <span class="highlight">resolvidos</span>.</h2>
-    <div class="cases-grid">
-      <div class="case-card">
-        <div class="case-icon">💰</div>
-        <h3>Supermercado — R$ 47k em horas extras</h3>
-        <p>Caixa trabalhava 10h/dia com intervalo suprimido. Banco de horas irregular. <strong>Resultado: R$ 47.000 em 6 meses.</strong></p>
-      </div>
-      <div class="case-card">
-        <div class="case-icon">🚫</div>
-        <h3>Gerente de TI — Rescisão indireta (R$ 220k)</h3>
-        <p>Humilhações públicas, metas impossíveis. <strong>Resultado: R$ 220.000 + danos morais.</strong></p>
-      </div>
-      <div class="case-card">
-        <div class="case-icon">🏥</div>
-        <h3>Operador de máquina — Acidente (R$ 180k)</h3>
-        <p>Perdeu 3 dedos em prensa hidráulica. CAT tardia. <strong>Resultado: R$ 180.000 + vitalício.</strong></p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- FAQ -->
 <section class="section" id="faq">
   <div class="container">
@@ -310,7 +257,7 @@ if(isMobile){window.location.href = "mobile.html";} }catch(e){}})();
       <details class="faq-item"><summary>Sem carteira assinada, tenho direitos?</summary><p>Sim. Se tinha horário, chefe e pagamento, a Justiça reconhece o vínculo e manda pagar FGTS, 13º, férias, multa de 40%.</p></details>
       <details class="faq-item"><summary>Posso ser demitido por justa causa?</summary><p>Só com falta grave comprovada. Se não provaram, a Justiça reverte e você recebe como demissão sem justa causa + FGTS + seguro.</p></details>
       <details class="faq-item"><summary>Quanto tempo dura um processo trabalhista?</summary><p>Varia. Cidades pequenas: 6-12 meses. Capital: 12-24 meses. Urgência? Peça tutela antecipada para receber antes.</p></details>
-      <details class="faq-item"><summary>Quanto custa um advogado trabalhista?</summary><p>Honorários de sucesso: 20-30% do valor recebido. Primeira consulta: grátis. Sem vitória, sem pagamento.</p></details>
+      <details class="faq-item"><summary>Quanto custa um advogado trabalhista?</summary><p>Honorários de êxito: percentual sobre o valor recebido, conforme a tabela da OAB. Primeira análise sem compromisso.</p></details>
       <details class="faq-item"><summary>Posso pedir demissão e receber?</summary><p>Depende. Se o patrão descumpriu (salário atrasado, FGTS), pode pedir rescisão indireta e receber como demissão.</p></details>
       <details class="faq-item"><summary>E se o patrão ameaçar?</summary><p>Ameaça é assédio. Anote tudo e procure um advogado. A CLT protege quem denuncia (art. 477-A).</p></details>
     </div>
@@ -396,10 +343,6 @@ if(isMobile){window.location.href = "mobile.html";} }catch(e){}})();
 <!-- SCROLL TOP -->
 <button class="scroll-top" id="scrollTop" aria-label="Voltar ao topo">↑</button>
 
-<!-- THREE.JS + GSAP via CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <script src="/script.js"></script>
 </body>
 </html>
