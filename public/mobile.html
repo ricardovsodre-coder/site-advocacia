@@ -122,8 +122,9 @@ a{color:inherit;text-decoration:none;display:block}
 .m-form-card p{color:var(--cinza-500);font-size:.86rem;margin-bottom:18px}
 .m-field{margin-bottom:14px}
 .m-field label{display:block;font-size:.8rem;font-weight:700;margin-bottom:6px;color:var(--cinza-300)}
-.m-field input{width:100%;padding:16px;border-radius:12px;border:1px solid var(--borda-sutil);background:#0B1529;color:var(--branco);font-size:1rem;font-family:var(--fonte);min-height:54px}
-.m-field input:focus{outline:none;border-color:var(--azul-500);box-shadow:0 0 0 3px rgba(0,200,255,.2)}
+.m-field input,.m-field textarea{width:100%;padding:16px;border-radius:12px;border:1px solid var(--borda-sutil);background:#0B1529;color:var(--branco);font-size:1rem;font-family:var(--fonte);min-height:54px}
+.m-field input:focus,.m-field textarea:focus{outline:none;border-color:var(--azul-500);box-shadow:0 0 0 3px rgba(0,200,255,.2)}
+.m-field textarea{min-height:110px;resize:vertical}
 .m-submit{width:100%;padding:18px;border-radius:14px;border:1px solid rgba(37,211,102,.55);background:linear-gradient(135deg,#1DA851,#25D366);color:#fff;font-weight:800;font-size:1rem;cursor:pointer;box-shadow:0 8px 30px rgba(37,211,102,.35);min-height:60px}
 .m-form-note{margin-top:12px;font-size:.75rem;color:var(--cinza-500);text-align:center}
 /* ---------- Bloco 4: FAQ ---------- */
@@ -175,13 +176,10 @@ a{color:inherit;text-decoration:none;display:block}
       <h1>Advogado <span class="highlight">Trabalhista</span> entenda o que a lei prevê para o <span class="highlight">seu caso</span></h1>
       <p>Horas extras, assédio, sem registro, verbas rescisórias, justa causa, insalubridade.</p>
     </div>
-    <div class="m-hero-actions">
-      <a class="m-btn m-btn-whats m-btn-duplo" href="https://wa.me/5515988033000?text=Ol%C3%A1%2C%20Dr.%20Ricardo!%20Vim%20pelo%20Instagram%20e%20quero%20falar%20com%20um%20advogado%20trabalhista."><strong>WhatsApp do Advogado</strong><small>Fale agora</small></a>
-      <a class="m-link-down" href="#areas">Ver áreas de atuação ↓</a>
-    </div>
+    <!-- CTAs principais: barra fixa + botão flutuante -->
     <div class="m-stats">
       <div class="m-stat"><strong>9</strong>áreas de atuação</div>
-      <div class="m-stat"><strong>OAB/SP</strong>441.049</div>
+      <div class="m-stat"><strong>441049</strong>OAB/SP</div>
       <div class="m-stat"><strong>100%</strong>foco no empregado</div>
     </div>
     <div class="m-3d-box" id="espaco-3d-mobile" data-3d="tabua-da-lei-touch" aria-label="Espaço reservado para elemento 3D interativo">
@@ -279,6 +277,10 @@ a{color:inherit;text-decoration:none;display:block}
         <div class="m-field">
           <label for="f-fone">Celular / WhatsApp *</label>
           <input id="f-fone" name="fone" type="tel" placeholder="(15) 90000-0000" required autocomplete="tel">
+        </div>
+        <div class="m-field">
+          <label for="f-caso">Conte seu caso:</label>
+          <textarea id="f-caso" name="caso" rows="4" placeholder="Ex.: Fui demitido sem receber minhas verbas..."></textarea>
         </div>
         <button class="m-submit" type="submit">Enviar Mensagem / Agendar Consulta</button>
       </form>
@@ -392,10 +394,12 @@ document.getElementById('lead-form').addEventListener('submit', function(e){
   e.preventDefault();
   var nome = document.getElementById('f-nome').value.trim();
   var fone = document.getElementById('f-fone').value.trim();
+  var caso = document.getElementById('f-caso').value.trim();
   if(!nome || !fone){ return; }
   var msg = 'Olá, Dr. Ricardo! Vim pelo Instagram e quero agendar uma consulta.%0A%0A'
     + 'Nome: ' + encodeURIComponent(nome) + '%0A'
     + 'Celular/WhatsApp: ' + encodeURIComponent(fone);
+  if(caso){ msg += '%0ACaso: ' + encodeURIComponent(caso); }
   window.open('https://wa.me/5515988033000?text=' + msg, '_blank');
 });
 </script>
