@@ -84,7 +84,7 @@ a{color:inherit;text-decoration:none;display:block}
 .m-3d-box{width:100%;min-height:260px;border-radius:var(--radius-lg);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.01)),#0E1B33;border:1.5px dashed var(--borda-azul);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.45);touch-action:pan-y}
 .m-3d-box::before{content:'';position:absolute;inset:0;background:radial-gradient(320px 220px at 50% 40%,rgba(0,200,255,.18),transparent 70%);pointer-events:none}
 .m-3d-inner{padding:18px 20px 24px;color:var(--cinza-500);font-size:.82rem;position:relative;z-index:1}
-#balanca3d{width:100%;height:300px;display:block;background:radial-gradient(220px 160px at 50% 55%,rgba(0,200,255,.12),transparent 70%);touch-action:pan-y}
+#deusa3d{width:100%;height:300px;display:block;background:radial-gradient(220px 160px at 50% 55%,rgba(0,200,255,.12),transparent 70%);touch-action:pan-y}
 .m-3d-inner strong{display:block;color:var(--branco);font-size:.95rem;margin-bottom:6px}
 .m-3d-tag{display:inline-block;margin-top:12px;font-size:.68rem;font-weight:800;letter-spacing:.1em;color:var(--azul-claro);border:1px solid var(--borda-azul);border-radius:var(--radius-full);padding:5px 12px}
 .m-msg-rotativa{min-height:7em;margin:8px 0 2px;font-size:.88rem;color:var(--cinza-300);transition:opacity .5s ease}
@@ -197,8 +197,8 @@ a{color:inherit;text-decoration:none;display:block}
       <div class="m-stat"><strong>441049</strong>OAB/SP</div>
       <div class="m-stat"><strong>100%</strong>foco no empregado</div>
     </div>
-    <div class="m-3d-box" id="espaco-3d-mobile" data-3d="balanca-de-vidro" aria-label="Balança da justiça em vidro com animação 3D">
-      <canvas id="balanca3d"></canvas>
+    <div class="m-3d-box" id="espaco-3d-mobile" data-3d="deusa-da-justica" aria-label="Deusa da justiça em vidro negro e ouro com animação 3D">
+      <canvas id="deusa3d"></canvas>
       <div class="m-3d-inner">
         <p class="m-msg-rotativa" id="msg3d"><span class="m-msg-titulo">Horas extras</span><span class="m-msg-texto">Adicional de no mínimo 50%, com reflexos em férias, 13º e FGTS.</span></p>
       </div>
@@ -538,7 +538,7 @@ document.getElementById('lead-form').addEventListener('submit', function(e){
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 (function(){
-  var canvas = document.getElementById('balanca3d');
+  var canvas = document.getElementById('deusa3d');
   if(!canvas) return;
   var box = document.getElementById('espaco-3d-mobile');
   var reduz = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -563,51 +563,90 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
     ponto.position.set(-3.2, 2.6, 3.2);
     scene.add(ponto);
 
-    var vidro = new THREE.MeshPhysicalMaterial({color:0xe8f9ff, metalness:0, roughness:0.06, transmission:1, thickness:1.3, ior:1.5, transparent:true, clearcoat:1, clearcoatRoughness:0.08});
-    var ciano = new THREE.MeshStandardMaterial({color:0x00c8ff, emissive:0x00c8ff, emissiveIntensity:1.6, roughness:0.4});
+    var obsidiana = new THREE.MeshPhysicalMaterial({color:0x0b0b0e, metalness:0.25, roughness:0.16, clearcoat:1, clearcoatRoughness:0.06});
+    var ouro = new THREE.MeshStandardMaterial({color:0xd8a93c, metalness:1, roughness:0.3});
+    var ouroClaro = new THREE.MeshStandardMaterial({color:0xf3d27a, metalness:1, roughness:0.22});
+    var quente = new THREE.PointLight(0xffd9a0, 6, 12, 1.7);
+    quente.position.set(3, 3.2, 4);
+    scene.add(quente);
 
     var root = new THREE.Group();
-    root.scale.setScalar(0.7);
-    root.position.y = 0.45;
+    root.position.y = -0.8;
     scene.add(root);
-    function malha(geo, mat, x, y){
+    function parte(geo, mat, x, y, z, sx, sy, sz){
       var m = new THREE.Mesh(geo, mat);
-      m.position.set(x || 0, y || 0, 0);
+      m.position.set(x || 0, y || 0, z || 0);
+      m.scale.set(sx || 1, sy === undefined ? (sx || 1) : sy, sz === undefined ? (sx || 1) : sz);
       root.add(m);
       return m;
     }
-    malha(new THREE.CylinderGeometry(1.05, 1.2, 0.2, 48), vidro, 0, 0.1);
-    var anel = malha(new THREE.TorusGeometry(1.28, 0.035, 12, 72), ciano, 0, 0.06);
-    anel.rotation.x = Math.PI / 2;
-    malha(new THREE.CylinderGeometry(0.11, 0.16, 2.6, 24), vidro, 0, 1.5);
-    malha(new THREE.SphereGeometry(0.16, 24, 18), ciano, 0, 2.92);
-    var trave = new THREE.Group();
-    trave.position.set(0, 2.78, 0);
-    root.add(trave);
-    trave.add(new THREE.Mesh(new THREE.BoxGeometry(3.6, 0.09, 0.09), vidro));
-    [-1.68, 1.68].forEach(function(x){
-      var ping = new THREE.Mesh(new THREE.SphereGeometry(0.07, 16, 12), ciano);
-      ping.position.set(x, 0, 0);
-      trave.add(ping);
-    });
-    var pratos = [];
-    [-1.68, 1.68].forEach(function(x){
-      var g = new THREE.Group();
-      g.position.set(x, 0, 0);
-      trave.add(g);
-      var lg = new THREE.BufferGeometry().setFromPoints([
-        new THREE.Vector3(0, 0, 0), new THREE.Vector3(0.42, -1.0, 0),
-        new THREE.Vector3(0, 0, 0), new THREE.Vector3(-0.42, -1.0, 0)
+    // ombros, peito e base
+    parte(new THREE.SphereGeometry(1, 40, 28), obsidiana, 0, 0.35, -0.05, 1.5, 0.72, 0.92);
+    parte(new THREE.SphereGeometry(1, 40, 28), obsidiana, 0, 0.85, 0.02, 1.02, 0.88, 0.82);
+    parte(new THREE.CylinderGeometry(1.15, 1.3, 0.22, 48), obsidiana, 0, -0.08, -0.02);
+    // pescoço
+    parte(new THREE.CylinderGeometry(0.3, 0.38, 0.9, 32), obsidiana, 0, 1.45, 0.02);
+    // crânio, mandíbula e queixo
+    parte(new THREE.SphereGeometry(0.62, 48, 32), obsidiana, 0, 2.2, -0.02, 1, 1.16, 1.02);
+    parte(new THREE.SphereGeometry(0.46, 40, 28), obsidiana, 0, 1.82, 0.1, 0.98, 0.82, 0.92);
+    parte(new THREE.SphereGeometry(0.16, 24, 18), obsidiana, 0, 1.58, 0.28, 1, 0.75, 0.8);
+    // nariz sutil
+    var nariz = parte(new THREE.ConeGeometry(0.085, 0.3, 20), obsidiana, 0, 1.98, 0.56);
+    nariz.rotation.x = Math.PI / 2 - 0.18;
+    // orelhas
+    parte(new THREE.SphereGeometry(0.13, 20, 14), obsidiana, -0.63, 2.0, -0.05, 1, 1.5, 0.7);
+    parte(new THREE.SphereGeometry(0.13, 20, 14), obsidiana, 0.63, 2.0, -0.05, 1, 1.5, 0.7);
+    // massa do cabelo atrás
+    parte(new THREE.SphereGeometry(0.8, 40, 28), obsidiana, 0, 2.25, -0.42, 0.92, 1.22, 0.88);
+    // mechas esvoaçantes sobre os ombros
+    function mecha(px, py, pz, qx, qy, qz, r){
+      var curva = new THREE.CatmullRomCurve3([
+        new THREE.Vector3(px[0], py[0], pz[0]),
+        new THREE.Vector3(px[1], py[1], pz[1]),
+        new THREE.Vector3(px[2], py[2], pz[2]),
+        new THREE.Vector3(qx, qy, qz)
       ]);
-      g.add(new THREE.LineSegments(lg, new THREE.LineBasicMaterial({color:0x9be9ff, transparent:true, opacity:0.85})));
-      var prato = new THREE.Mesh(new THREE.CylinderGeometry(0.62, 0.45, 0.1, 40), vidro);
-      prato.position.set(0, -1.05, 0);
-      g.add(prato);
-      var borda = new THREE.Mesh(new THREE.TorusGeometry(0.62, 0.022, 10, 48), ciano);
-      borda.rotation.x = Math.PI / 2;
-      borda.position.set(0, -1.0, 0);
-      g.add(borda);
-      pratos.push(g);
+      root.add(new THREE.Mesh(new THREE.TubeGeometry(curva, 28, r, 10, false), obsidiana));
+    }
+    [0.5, 0.62, 0.74].forEach(function(dx, k){
+      var r = 0.12 - k * 0.018;
+      mecha([-0.3, -0.55, -0.5], [2.95, 2.3, 1.55], [-0.15, 0.1, 0.5], -dx - 0.03, 0.8 - k * 0.28, 0.6, r);
+      mecha([0.3, 0.55, 0.5], [2.95, 2.3, 1.55], [-0.15, 0.1, 0.5], dx + 0.03, 0.8 - k * 0.28, 0.6, r);
+    });
+    mecha([-0.4, -0.55, -0.5], [2.9, 2.0, 1.0], [-0.5, -0.62, -0.55], -0.5, 0.35, -0.5, 0.13);
+    mecha([0.4, 0.55, 0.5], [2.9, 2.0, 1.0], [-0.5, -0.62, -0.55], 0.5, 0.35, -0.5, 0.13);
+    // venda dourada
+    var venda = parte(new THREE.TorusGeometry(0.62, 0.17, 20, 64), ouro, 0, 2.22, 0.02, 1, 1, 1);
+    venda.rotation.x = Math.PI / 2 - 0.1;
+    // nó + fitas da venda
+    parte(new THREE.SphereGeometry(0.11, 18, 14), ouroClaro, 0.64, 2.14, -0.12, 1, 0.85, 1);
+    var fita1 = parte(new THREE.BoxGeometry(0.12, 0.55, 0.03), ouro, 0.72, 1.82, -0.28);
+    fita1.rotation.z = 0.25; fita1.rotation.y = 0.4;
+    var fita2 = parte(new THREE.BoxGeometry(0.1, 0.45, 0.03), ouro, 0.6, 1.86, -0.34);
+    fita2.rotation.z = -0.2; fita2.rotation.y = 0.5;
+    // dobras do manto no peito
+    [0, -0.3, -0.6].forEach(function(o){
+      var cy = new THREE.CatmullRomCurve3([
+        new THREE.Vector3(-0.72, 1.15 + o, 0.3),
+        new THREE.Vector3(-0.25, 0.95 + o, 0.8),
+        new THREE.Vector3(0.3, 0.72 + o, 0.85),
+        new THREE.Vector3(0.72, 0.5 + o, 0.3)
+      ]);
+      root.add(new THREE.Mesh(new THREE.TubeGeometry(cy, 24, 0.085, 10, false), obsidiana));
+    });
+    // medalhões dourados
+    [-0.62, 0.62].forEach(function(x){
+      var moeda = new THREE.Mesh(new THREE.CylinderGeometry(0.21, 0.21, 0.06, 36), ouro);
+      moeda.rotation.x = Math.PI / 2 - 0.3;
+      moeda.position.set(x, 0.98, 0.68);
+      root.add(moeda);
+      var aro = new THREE.Mesh(new THREE.TorusGeometry(0.15, 0.022, 10, 36), ouroClaro);
+      aro.position.set(x, 0.99, 0.72);
+      root.add(aro);
+      var miolo = new THREE.Mesh(new THREE.SphereGeometry(0.055, 16, 12), ouroClaro);
+      miolo.position.set(x, 0.99, 0.73);
+      miolo.scale.z = 0.6;
+      root.add(miolo);
     });
     var N = 130, pos = new Float32Array(N * 3), vel = new Float32Array(N);
     for(var k = 0; k < N; k++){
@@ -642,10 +681,8 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
       requestAnimationFrame(anima);
       if(!visivel) return;
       var t = relogio.getElapsedTime();
-      root.rotation.y = t * 0.35;
-      trave.rotation.z = Math.sin(t * 0.9) * 0.045;
-      pratos[0].rotation.z = -trave.rotation.z;
-      pratos[1].rotation.z = -trave.rotation.z;
+      root.rotation.y = t * 0.3;
+      root.position.y = -0.8 + Math.sin(t * 0.8) * 0.035;
       var p = pg.attributes.position;
       for(var j = 0; j < N; j++){ var y = p.getY(j) + vel[j]; if(y > 3.5) y = 0; p.setY(j, y); }
       p.needsUpdate = true;
