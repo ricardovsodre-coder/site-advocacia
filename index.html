@@ -82,7 +82,7 @@ if(isMobile){window.location.href = "mobile.html";} }catch(e){}})();
       <div class="hero-3d-placeholder" id="espaco-3d" data-3d="tabua-da-lei">
         <div class="hero-3d-inner">
           <strong>🏛️ Espaço 3D Interativo</strong>
-          Aqui será embutida a Tábua da Lei 3D.
+          <p class="hero-3d-msg" id="msg3dDesk">⏰ <strong>Horas extras</strong> — adicional de no mínimo 50%, com reflexos.</p>
         </div>
       </div>
     </div>
@@ -344,5 +344,31 @@ if(isMobile){window.location.href = "mobile.html";} }catch(e){}})();
 <button class="scroll-top" id="scrollTop" aria-label="Voltar ao topo">↑</button>
 
 <script src="/script.js"></script>
+<script>
+// Mensagens rotativas no espaço 3D (troca a cada 4s)
+(function(){
+  var el = document.getElementById('msg3dDesk');
+  if(!el) return;
+  var msgs = [
+    '⏰ <strong>Horas extras</strong> — adicional de no mínimo 50%, com reflexos.',
+    '💰 <strong>Piso por categoria</strong> — sua convenção coletiva pode garantir mais que o mínimo.',
+    '🛡️ <strong>Insalubridade</strong> — adicional de 10%, 20% ou 40%, apurado por perícia.',
+    '📋 <strong>Sem registro</strong> — com horário, chefe e pagamento, o vínculo pode ser reconhecido.',
+    '🚫 <strong>Assédio moral</strong> — humilhação repetida pode gerar indenização. Anote tudo.',
+    '🔄 <strong>Rescisão indireta</strong> — salário atrasado ou FGTS sem depósito? Oriente-se antes de sair.',
+    '⚡ <strong>Justa causa</strong> — só vale com falta grave provada. Sem prova, pode ser revertida.',
+    '🏥 <strong>Acidente de trabalho</strong> — CAT + 12 meses de estabilidade após a alta.'
+  ];
+  var i = 0;
+  setInterval(function(){
+    el.classList.add('trocando');
+    setTimeout(function(){
+      i = (i + 1) % msgs.length;
+      el.innerHTML = msgs[i];
+      el.classList.remove('trocando');
+    }, 500);
+  }, 4000);
+})();
+</script>
 </body>
 </html>
