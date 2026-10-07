@@ -199,5 +199,33 @@
     animate();
   }
 
+  // === PADRÃO MOBILE: uma caixa por vez + X vermelho ===
+  document.querySelectorAll('.d-cards,.faq-list').forEach(function(grupo) {
+    grupo.querySelectorAll('summary').forEach(function(sum) {
+      if (sum.querySelector('.m-x')) return;
+      var x = document.createElement('button');
+      x.type = 'button';
+      x.className = 'm-x';
+      x.setAttribute('aria-label', 'Fechar');
+      x.textContent = '×';
+      x.addEventListener('click', function(ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        var d = sum.parentElement;
+        if (d) d.open = false;
+      });
+      sum.appendChild(x);
+    });
+    grupo.querySelectorAll('details').forEach(function(det) {
+      det.addEventListener('toggle', function() {
+        if (det.open) {
+          grupo.querySelectorAll('details').forEach(function(o) {
+            if (o !== det) o.open = false;
+          });
+        }
+      });
+    });
+  });
+
   console.log('✅ Veríssimo Sodré 3D site loaded');
 })();

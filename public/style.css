@@ -412,6 +412,56 @@ img { max-width: 100%; display: block; }
   z-index: 90;
 }
 
+/* ---------- 13. PADRÃO MOBILE NO PC ---------- */
+.hero-kicker{display:block;font-size:1.05rem;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:var(--branco);margin-bottom:14px}
+/* Caixa 3D em linha cheia */
+.d-3d{padding:8px 0 96px}
+.d-3d-wrap{perspective:1200px}
+.d-3d-box{position:relative;border-radius:18px;background:linear-gradient(160deg,rgba(14,40,70,.55),rgba(10,22,45,.45));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(170,235,225,.55);box-shadow:inset 0 0 0 2px rgba(190,255,245,.22),inset 0 2px 0 rgba(255,255,255,.3),inset 0 -3px 8px rgba(0,0,0,.55),0 0 0 5px rgba(10,42,52,.6),0 0 0 6px rgba(160,230,220,.35),0 34px 70px -8px rgba(0,0,0,.7),0 0 44px rgba(0,200,255,.16);overflow:hidden;touch-action:pan-y}
+.d-3d-box::before{content:'';position:absolute;inset:0;background:radial-gradient(520px 300px at 50% 38%,rgba(0,200,255,.16),transparent 70%);pointer-events:none}
+.d-3d-box::after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:3px;background:radial-gradient(ellipse at center,rgba(0,220,255,.95),rgba(0,200,255,.15) 60%,transparent 75%);background-repeat:no-repeat;background-position:center;background-size:0% 100%;opacity:0;animation:topoLinha 8.4s ease-in-out infinite;pointer-events:none}
+@keyframes topoLinha{0%{background-size:0% 100%;opacity:0}5%{opacity:1}18%{background-size:100% 100%;opacity:1}62%{background-size:100% 100%;opacity:1}76%{background-size:0% 100%;opacity:1}82%,100%{background-size:0% 100%;opacity:0}}
+.d-glare{position:absolute;inset:0;border-radius:inherit;background:radial-gradient(420px 260px at var(--gx,50%) var(--gy,30%),rgba(255,255,255,.14),transparent 60%);pointer-events:none;z-index:3}
+#balancaD{width:100%;height:340px;display:block;background:radial-gradient(260px 180px at 50% 55%,rgba(0,200,255,.12),transparent 70%)}
+.d-legend{padding:10px 28px 30px;text-align:center;position:relative;z-index:1}
+.d-msg-titulo{display:block;font-size:1.7rem;font-weight:900;letter-spacing:.12em;color:var(--verde-claro);text-transform:uppercase;margin-bottom:10px;text-shadow:0 0 24px rgba(0,200,255,.4);transition:opacity .35s ease,transform .35s ease,filter .35s ease}
+.d-msg-texto{display:block;font-size:1rem;color:var(--cinza-300);line-height:1.7;max-width:640px;margin:0 auto}
+.d-msg-texto.digitando::after{content:'▍';color:var(--verde-claro);animation:piscar 1s steps(1) infinite}
+@keyframes piscar{50%{opacity:0}}
+/* Cards padrão mobile */
+.d-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.d-card{background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,.02) 42%,rgba(0,200,255,.07));border:1px solid rgba(255,255,255,.16);border-top:3px solid #00c8ff;border-radius:14px;padding:22px;box-shadow:inset 0 1px 0 rgba(255,255,255,.22)}
+.d-card summary{position:relative;cursor:pointer;list-style:none;padding-right:42px}
+.d-card summary::-webkit-details-marker{display:none}
+.d-card summary::before{content:'›';display:inline-block;color:#00c8ff;font-weight:700;margin-right:8px;transition:transform .3s}
+.d-card[open] summary::before{transform:rotate(90deg)}
+.d-card summary h3{display:inline;font-size:1.05rem;color:#00c8ff}
+.d-card .prazo{display:inline-block;font-size:.72rem;font-weight:700;color:#ffd166;background:rgba(255,209,102,.1);border:1px solid rgba(255,209,102,.45);border-radius:20px;padding:3px 10px;margin:8px 0 2px}
+.d-card h4{font-size:.85rem;color:#9be9ff;margin:10px 0 4px}
+.d-card p{font-size:.88rem;color:var(--cinza-300)}
+.d-card-cta{margin-top:12px}
+.d-wa{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:700;padding:10px 14px;border-radius:10px;text-decoration:none;background:transparent;border:1px solid rgba(37,211,102,.55);color:#7be495}
+.d-card[open]{background:rgba(0,120,255,.22);border-color:rgba(0,200,255,.5)}
+#areas:has(.d-card[open]) .d-card:not([open]){opacity:.4}
+.d-card{transition:opacity .3s}
+/* X vermelho + sanfona do FAQ */
+.m-x{position:absolute;top:-9px;right:4px;width:28px;height:28px;display:none;align-items:center;justify-content:center;background:rgba(255,70,70,.95);color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:7px;font-size:17px;font-weight:700;line-height:1;cursor:pointer;font-family:var(--font-family);z-index:2;box-shadow:0 4px 12px rgba(0,0,0,.45)}
+.d-card[open] summary .m-x,.faq-item[open] summary .m-x{display:inline-flex}
+.faq-item summary{position:relative;padding-right:42px}
+.faq-item summary::before{content:'›';display:inline-block;color:var(--verde-claro);font-weight:700;margin-right:8px;transition:transform .3s}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item[open] summary::before{transform:rotate(90deg)}
+.faq-item[open]{background:rgba(0,120,255,.14);border-color:rgba(0,200,255,.5)}
+/* Logo no rodapé */
+.footer-logo{display:flex;flex-direction:column;align-items:flex-start;margin-bottom:10px}
+.footer-logo .logo{font-family:'Bauhaus 93',sans-serif;line-height:1;white-space:nowrap;font-size:1.6rem;animation:logoWrite 10s ease-in-out infinite}
+.footer-logo .logo .l1{color:#00c8ff;text-shadow:0 0 20px rgba(0,200,255,.35)}
+.footer-logo .logo .l2{color:transparent;-webkit-text-stroke:1.5px #00c8ff}
+.footer-logo .logo-sub{font-weight:300;letter-spacing:4px;color:#dfe6ec;font-size:.62rem;margin-top:2px;white-space:nowrap}
+@media (prefers-reduced-motion:reduce){.d-3d-box::after,.d-msg-texto.digitando::after,.footer-logo .logo{animation:none!important}}
+@media (max-width:1024px){.d-cards{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:768px){.d-cards{grid-template-columns:1fr}#balancaD{height:260px}}
+
 /* ---------- 12. RESPONSIVO ---------- */
 @media (max-width: 1024px) {
   .areas-grid, .articles-grid, .team-grid, .cases-grid { grid-template-columns: repeat(2, 1fr); }
