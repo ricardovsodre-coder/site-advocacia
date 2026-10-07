@@ -44,12 +44,14 @@ a{color:inherit;text-decoration:none;display:block}
 .m-faq details{border-top:3px solid var(--accent,#00c8ff)}
 .m-faq summary{color:var(--accent,#fff)}
 /* Acentos: ciano único em tudo (padrão do modelo) */
-@media (prefers-reduced-motion:reduce){.bloco,.bloco .m-card,.bloco .m-faq details,.bloco .m-contact a{opacity:1!important;transform:none!important;transition:none!important}.m-logo .logo,.m-footer-logo .logo{animation:none!important}.revela{opacity:1!important;transform:none!important;transition:none!important}.m-bottom .m-btn-whats,.m-bottom .m-btn-whats::after,.m-submit::after,.m-bottom::before,.m-float::after,.m-msg-texto.digitando::after{animation:none!important}}
+@media (prefers-reduced-motion:reduce){.bloco,.bloco .m-card,.bloco .m-faq details,.bloco .m-contact a{opacity:1!important;transform:none!important;transition:none!important}.m-logo .logo,.m-footer-logo .logo{animation:none!important}.revela{opacity:1!important;transform:none!important;transition:none!important}.m-bottom .m-btn-whats,.m-bottom .m-btn-whats::after,.m-submit::after,.m-bottom::before,.m-float::after,.m-msg-texto.digitando::after,.m-header::after{animation:none!important}}
 /* ---------- Logo original (Bauhaus 93, intocada) ---------- */
 @font-face{font-family:'Bauhaus 93';src:url('BAUHS93.TTF') format('truetype');font-display:swap}
 @keyframes logoWrite{0%,20%{opacity:.3;filter:blur(1.5px)}25%,95%{opacity:1;filter:blur(0)}100%{opacity:.3;filter:blur(1.5px)}}
 /* Header compacto */
 .m-header{position:sticky;top:0;z-index:50;background:rgba(7,13,26,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--borda-sutil)}
+.m-header::after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:3px;background:radial-gradient(ellipse at center,rgba(0,220,255,.95),rgba(0,200,255,.15) 60%,transparent 75%);background-repeat:no-repeat;background-position:center;background-size:0% 100%;opacity:0;animation:topoLinha 8.4s ease-in-out infinite;pointer-events:none}
+@keyframes topoLinha{0%{background-size:0% 100%;opacity:0}5%{opacity:1}18%{background-size:100% 100%;opacity:1}62%{background-size:100% 100%;opacity:1}76%{background-size:0% 100%;opacity:1}82%,100%{background-size:0% 100%;opacity:0}}
 .m-header-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
 .m-logo{display:inline-flex;flex-direction:column;align-items:flex-end;text-align:right;text-decoration:none}
 .m-logo .logo{font-family:'Bauhaus 93',sans-serif;line-height:1;white-space:nowrap;font-size:1.9rem;animation:logoWrite 10s ease-in-out infinite}
@@ -159,8 +161,8 @@ a{color:inherit;text-decoration:none;display:block}
 .m-bottom-inner{max-width:480px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .m-bottom .m-btn{min-height:58px;font-size:.82rem;padding:10px 8px;flex-direction:column;gap:2px}
 .m-bottom .m-btn small{font-size:.68rem;font-weight:600;opacity:.9}
-.m-bottom::before{content:'';position:absolute;top:-2px;left:0;right:0;height:3px;background:radial-gradient(ellipse at center,rgba(0,220,255,.95),rgba(0,200,255,.15) 60%,transparent 75%);background-repeat:no-repeat;background-position:center;background-size:14% 100%;animation:glowX 5s ease-in-out infinite;pointer-events:none}
-@keyframes glowX{0%,60%{background-size:14% 100%;opacity:.55}75%{background-size:100% 100%;opacity:1}90%,100%{background-size:14% 100%;opacity:.55}}
+.m-bottom::before{content:'';position:absolute;top:-2px;left:0;right:0;height:3px;background:radial-gradient(ellipse at center,rgba(0,220,255,.95),rgba(0,200,255,.15) 60%,transparent 75%);background-repeat:no-repeat;background-position:center;background-size:14% 100%;animation:glowHold 8.4s ease-in-out infinite;pointer-events:none}
+@keyframes glowHold{0%{background-size:14% 100%;opacity:.55}14%{background-size:100% 100%;opacity:1}62%{background-size:100% 100%;opacity:1}76%{background-size:14% 100%;opacity:.55}100%{background-size:14% 100%;opacity:.55}}
 .m-bottom .m-btn-whats{position:relative;overflow:hidden;background:linear-gradient(135deg,#1DA851,#25D366);border:1px solid rgba(37,211,102,.35);color:#fff;box-shadow:0 4px 18px rgba(37,211,102,.18);animation:zapSeq 8.2s ease-in-out infinite}
 .m-bottom .m-btn-whats:last-child{animation-delay:1.6s}
 .m-bottom .m-btn-whats::after{content:'';position:absolute;inset:-40%;background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.12) 50%,transparent 58%);transform:translateX(-70%);opacity:0;animation:zapSheenSeq 8.2s ease-in-out infinite;pointer-events:none}
