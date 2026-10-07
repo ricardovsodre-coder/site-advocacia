@@ -684,20 +684,9 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
     // mesa sutil + cepo + martelo FIXOS (não giram com a balança)
     var madeira = new THREE.MeshPhysicalMaterial({color:0xe8f9ff, metalness:0, roughness:0.06, transmission:1, thickness:1.2, ior:1.5, transparent:true, clearcoat:1, clearcoatRoughness:0.08, side:THREE.DoubleSide});
     var ouroVelho = new THREE.MeshPhysicalMaterial({color:0xe8f9ff, metalness:0, roughness:0.06, transmission:1, thickness:1.2, ior:1.5, transparent:true, clearcoat:1, clearcoatRoughness:0.08, side:THREE.DoubleSide});
-    // (mesa removida — só balança + martelo com cepo, tudo em vidro)
-    var cepoPerfil = [
-      new THREE.Vector2(0.0, 0.0),
-      new THREE.Vector2(0.78, 0.0),
-      new THREE.Vector2(0.82, 0.06),
-      new THREE.Vector2(0.7, 0.12),
-      new THREE.Vector2(0.74, 0.2),
-      new THREE.Vector2(0.68, 0.26),
-      new THREE.Vector2(0.0, 0.28)
-    ];
-    var cepo = new THREE.Mesh(new THREE.LatheGeometry(cepoPerfil, 48), madeira);
-    cepo.position.set(-1.9, 0.0, 1.9);
-    scene.add(cepo);
-    // (martelo removido — só a balança + cepo)
+    // (só a balança, tudo em vidro)
+    // (cepo removido — só a balança)
+    // (só a balança)
     var N = 130, pos = new Float32Array(N * 3), vel = new Float32Array(N);
     for(var k = 0; k < N; k++){
       pos[k*3] = (Math.random() - 0.5) * 5;
