@@ -567,6 +567,8 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
     var ciano = new THREE.MeshStandardMaterial({color:0x00c8ff, emissive:0x00c8ff, emissiveIntensity:1.6, roughness:0.4});
 
     var root = new THREE.Group();
+    root.scale.setScalar(0.7);
+    root.position.y = 0.45;
     scene.add(root);
     function malha(geo, mat, x, y){
       var m = new THREE.Mesh(geo, mat);
