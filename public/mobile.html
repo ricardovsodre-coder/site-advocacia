@@ -16,6 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}</script>
 <style>
 /* ===== MOBILE 5 BLOCOS — azul do logo + fade por rolagem ===== */
 :root{
@@ -80,9 +81,10 @@ a{color:inherit;text-decoration:none;display:block}
 .m-stat{font-size:.72rem;color:var(--cinza-500)}
 .m-stat strong{display:block;font-size:1.3rem;color:var(--branco)}
 /* Container 3D centralizado */
-.m-3d-box{width:100%;min-height:260px;border-radius:var(--radius-lg);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.01)),#0E1B33;border:1.5px dashed var(--borda-azul);display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.45);touch-action:pan-y}
+.m-3d-box{width:100%;min-height:260px;border-radius:var(--radius-lg);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.01)),#0E1B33;border:1.5px dashed var(--borda-azul);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.45);touch-action:pan-y}
 .m-3d-box::before{content:'';position:absolute;inset:0;background:radial-gradient(320px 220px at 50% 40%,rgba(0,200,255,.18),transparent 70%);pointer-events:none}
-.m-3d-inner{padding:24px 20px;color:var(--cinza-500);font-size:.82rem;position:relative;z-index:1}
+.m-3d-inner{padding:18px 20px 24px;color:var(--cinza-500);font-size:.82rem;position:relative;z-index:1}
+#balanca3d{width:100%;height:300px;display:block;background:radial-gradient(220px 160px at 50% 55%,rgba(0,200,255,.12),transparent 70%);touch-action:pan-y}
 .m-3d-inner strong{display:block;color:var(--branco);font-size:.95rem;margin-bottom:6px}
 .m-3d-tag{display:inline-block;margin-top:12px;font-size:.68rem;font-weight:800;letter-spacing:.1em;color:var(--azul-claro);border:1px solid var(--borda-azul);border-radius:var(--radius-full);padding:5px 12px}
 .m-msg-rotativa{min-height:7em;margin:8px 0 2px;font-size:.88rem;color:var(--cinza-300);transition:opacity .5s ease}
@@ -153,7 +155,8 @@ a{color:inherit;text-decoration:none;display:block}
 .m-footer-logo .logo .l2{color:transparent;-webkit-text-stroke:1.6px #00c8ff}
 .m-footer-logo .logo-sub{font-weight:300;letter-spacing:4px;color:#dfe6ec;font-size:.7rem;margin-top:2px;white-space:nowrap}
 /* ---------- Botões fixos ---------- */
-.m-float{position:fixed;right:16px;bottom:104px;z-index:60;width:58px;height:58px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 10px 30px rgba(37,211,102,.45);border:1px solid rgba(255,255,255,.25)}
+.m-float{position:fixed;right:16px;bottom:104px;z-index:60;width:58px;height:58px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 10px 30px rgba(37,211,102,.45);border:1px solid rgba(255,255,255,.25);touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
+.m-float:active{cursor:grabbing}
 .m-float svg{width:32px;height:32px;fill:#fff}
 .m-float::after{content:'';position:absolute;inset:-1px;border-radius:50%;border:2px solid rgba(37,211,102,.7);pointer-events:none;animation:ripM 2.4s ease-out infinite}
 @keyframes ripM{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.55);opacity:0}}
@@ -194,7 +197,8 @@ a{color:inherit;text-decoration:none;display:block}
       <div class="m-stat"><strong>441049</strong>OAB/SP</div>
       <div class="m-stat"><strong>100%</strong>foco no empregado</div>
     </div>
-    <div class="m-3d-box" id="espaco-3d-mobile" data-3d="tabua-da-lei-touch" aria-label="Espaço reservado para elemento 3D interativo">
+    <div class="m-3d-box" id="espaco-3d-mobile" data-3d="balanca-de-vidro" aria-label="Balança da justiça em vidro com animação 3D">
+      <canvas id="balanca3d"></canvas>
       <div class="m-3d-inner">
         <p class="m-msg-rotativa" id="msg3d"><span class="m-msg-titulo">Horas extras</span><span class="m-msg-texto">Adicional de no mínimo 50%, com reflexos em férias, 13º e FGTS.</span></p>
       </div>
@@ -440,6 +444,54 @@ a{color:inherit;text-decoration:none;display:block}
   }
   proximo();
 })();
+// Botão flutuante arrastável (dedo ou mouse), com memória de posição
+(function(){
+  var b = document.querySelector('.m-float');
+  if(!b) return;
+  var sx=0, sy=0, bx=0, by=0, movendo=false, arrastou=false;
+  try{
+    var pos = JSON.parse(localStorage.getItem('mfloat-pos') || 'null');
+    if(pos && typeof pos.left === 'number' && typeof pos.top === 'number'){
+      b.style.left = pos.left + 'px';
+      b.style.top = pos.top + 'px';
+      b.style.right = 'auto';
+      b.style.bottom = 'auto';
+    }
+  }catch(e){}
+  function dentro(v, min, max){ return Math.max(min, Math.min(max, v)); }
+  function inicio(x, y){
+    var r = b.getBoundingClientRect();
+    sx = x; sy = y; bx = r.left; by = r.top;
+    movendo = true; arrastou = false;
+  }
+  function move(x, y){
+    if(!movendo) return;
+    var dx = x - sx, dy = y - sy;
+    if(Math.abs(dx) + Math.abs(dy) > 8) arrastou = true;
+    if(arrastou){
+      var w = b.offsetWidth, h = b.offsetHeight;
+      b.style.left = dentro(bx + dx, 8, window.innerWidth - w - 8) + 'px';
+      b.style.top = dentro(by + dy, 8, window.innerHeight - h - 8) + 'px';
+      b.style.right = 'auto';
+      b.style.bottom = 'auto';
+    }
+  }
+  function fim(){
+    if(!movendo) return;
+    movendo = false;
+    if(arrastou){
+      try{ localStorage.setItem('mfloat-pos', JSON.stringify({left: parseFloat(b.style.left), top: parseFloat(b.style.top)})); }catch(e){}
+    }
+  }
+  b.addEventListener('touchstart', function(e){ inicio(e.touches[0].clientX, e.touches[0].clientY); }, {passive:true});
+  b.addEventListener('touchmove', function(e){ if(movendo){ e.preventDefault(); } move(e.touches[0].clientX, e.touches[0].clientY); }, {passive:false});
+  b.addEventListener('touchend', fim);
+  b.addEventListener('touchcancel', fim);
+  b.addEventListener('mousedown', function(e){ inicio(e.clientX, e.clientY); });
+  window.addEventListener('mousemove', function(e){ move(e.clientX, e.clientY); });
+  window.addEventListener('mouseup', fim);
+  b.addEventListener('click', function(e){ if(arrastou){ e.preventDefault(); e.stopPropagation(); arrastou = false; } }, true);
+})();
 // Uma caixa por vez + botão X vermelho (Atuação e Dúvidas)
 document.querySelectorAll('.m-cards,.m-faq').forEach(function(grupo){
   grupo.querySelectorAll('summary').forEach(function(sum){
@@ -480,6 +532,127 @@ document.getElementById('lead-form').addEventListener('submit', function(e){
   try{ fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nome:nome,fone:fone,caso:caso,lgpd:true})}).catch(function(){}); }catch(err){}
   window.open('https://wa.me/5515988033000?text=' + msg, '_blank');
 });
+</script>
+<script type="module">
+// Balança da justiça em vidro — Three.js via CDN (pausa fora da tela, consome pouca bateria)
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+(function(){
+  var canvas = document.getElementById('balanca3d');
+  if(!canvas) return;
+  var box = document.getElementById('espaco-3d-mobile');
+  var reduz = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  try{
+    var renderer = new THREE.WebGLRenderer({canvas:canvas, alpha:true, antialias:true});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.15;
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+    camera.position.set(0, 1.75, 7.4);
+    camera.lookAt(0, 1.45, 0);
+    try{
+      var pmrem = new THREE.PMREMGenerator(renderer);
+      scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    }catch(e){}
+    scene.add(new THREE.HemisphereLight(0xbfefff, 0x0b1529, 0.85));
+    var dir = new THREE.DirectionalLight(0xffffff, 1.1);
+    dir.position.set(4, 6, 6);
+    scene.add(dir);
+    var ponto = new THREE.PointLight(0x00c8ff, 14, 14, 1.6);
+    ponto.position.set(-3.2, 2.6, 3.2);
+    scene.add(ponto);
+
+    var vidro = new THREE.MeshPhysicalMaterial({color:0xe8f9ff, metalness:0, roughness:0.06, transmission:1, thickness:1.3, ior:1.5, transparent:true, clearcoat:1, clearcoatRoughness:0.08});
+    var ciano = new THREE.MeshStandardMaterial({color:0x00c8ff, emissive:0x00c8ff, emissiveIntensity:1.6, roughness:0.4});
+
+    var root = new THREE.Group();
+    scene.add(root);
+    function malha(geo, mat, x, y){
+      var m = new THREE.Mesh(geo, mat);
+      m.position.set(x || 0, y || 0, 0);
+      root.add(m);
+      return m;
+    }
+    malha(new THREE.CylinderGeometry(1.05, 1.2, 0.2, 48), vidro, 0, 0.1);
+    var anel = malha(new THREE.TorusGeometry(1.28, 0.035, 12, 72), ciano, 0, 0.06);
+    anel.rotation.x = Math.PI / 2;
+    malha(new THREE.CylinderGeometry(0.11, 0.16, 2.6, 24), vidro, 0, 1.5);
+    malha(new THREE.SphereGeometry(0.16, 24, 18), ciano, 0, 2.92);
+    var trave = new THREE.Group();
+    trave.position.set(0, 2.78, 0);
+    root.add(trave);
+    trave.add(new THREE.Mesh(new THREE.BoxGeometry(3.6, 0.09, 0.09), vidro));
+    [-1.68, 1.68].forEach(function(x){
+      var ping = new THREE.Mesh(new THREE.SphereGeometry(0.07, 16, 12), ciano);
+      ping.position.set(x, 0, 0);
+      trave.add(ping);
+    });
+    var pratos = [];
+    [-1.68, 1.68].forEach(function(x){
+      var g = new THREE.Group();
+      g.position.set(x, 0, 0);
+      trave.add(g);
+      var lg = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(0, 0, 0), new THREE.Vector3(0.42, -1.0, 0),
+        new THREE.Vector3(0, 0, 0), new THREE.Vector3(-0.42, -1.0, 0)
+      ]);
+      g.add(new THREE.LineSegments(lg, new THREE.LineBasicMaterial({color:0x9be9ff, transparent:true, opacity:0.85})));
+      var prato = new THREE.Mesh(new THREE.CylinderGeometry(0.62, 0.45, 0.1, 40), vidro);
+      prato.position.set(0, -1.05, 0);
+      g.add(prato);
+      var borda = new THREE.Mesh(new THREE.TorusGeometry(0.62, 0.022, 10, 48), ciano);
+      borda.rotation.x = Math.PI / 2;
+      borda.position.set(0, -1.0, 0);
+      g.add(borda);
+      pratos.push(g);
+    });
+    var N = 130, pos = new Float32Array(N * 3), vel = new Float32Array(N);
+    for(var k = 0; k < N; k++){
+      pos[k*3] = (Math.random() - 0.5) * 5;
+      pos[k*3+1] = Math.random() * 3.4;
+      pos[k*3+2] = (Math.random() - 0.5) * 2.4;
+      vel[k] = 0.004 + Math.random() * 0.01;
+    }
+    var pg = new THREE.BufferGeometry();
+    pg.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    scene.add(new THREE.Points(pg, new THREE.PointsMaterial({color:0x7fe7ff, size:0.045, transparent:true, opacity:0.8})));
+
+    function ajustar(){
+      var w = box ? box.clientWidth : canvas.clientWidth;
+      if(!w) return;
+      renderer.setSize(w, 300, false);
+      camera.aspect = w / 300;
+      camera.updateProjectionMatrix();
+    }
+    ajustar();
+    window.addEventListener('resize', ajustar);
+    if(reduz){ renderer.render(scene, camera); return; }
+    var visivel = true, relogio = new THREE.Clock();
+    if('IntersectionObserver' in window && box){
+      new IntersectionObserver(function(es){ visivel = es[0].isIntersecting; }, {threshold:0.05}).observe(box);
+    }
+    document.addEventListener('visibilitychange', function(){
+      if(document.hidden){ visivel = false; }
+      else if(box){ var r = box.getBoundingClientRect(); visivel = r.bottom > 0 && r.top < window.innerHeight; }
+    });
+    (function anima(){
+      requestAnimationFrame(anima);
+      if(!visivel) return;
+      var t = relogio.getElapsedTime();
+      root.rotation.y = t * 0.35;
+      trave.rotation.z = Math.sin(t * 0.9) * 0.045;
+      pratos[0].rotation.z = -trave.rotation.z;
+      pratos[1].rotation.z = -trave.rotation.z;
+      var p = pg.attributes.position;
+      for(var j = 0; j < N; j++){ var y = p.getY(j) + vel[j]; if(y > 3.5) y = 0; p.setY(j, y); }
+      p.needsUpdate = true;
+      renderer.render(scene, camera);
+    })();
+  }catch(e){
+    canvas.style.display = 'none';
+  }
+})();
 </script>
 </body>
 </html>
