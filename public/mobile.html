@@ -43,14 +43,8 @@ a{color:inherit;text-decoration:none;display:block}
 /* Dúvidas coloridas — mesmo padrão da Atuação */
 .m-faq details{border-top:3px solid var(--accent,#00c8ff)}
 .m-faq summary{color:var(--accent,#fff)}
-#faq .m-faq details:nth-of-type(1){--accent:#00c8ff}
-#faq .m-faq details:nth-of-type(2){--accent:#c77dff}
-#faq .m-faq details:nth-of-type(3){--accent:#ffb020}
-#faq .m-faq details:nth-of-type(4){--accent:#00c8ff}
-#faq .m-faq details:nth-of-type(5){--accent:#c77dff}
-#faq .m-faq details:nth-of-type(6){--accent:#ffb020}
-#faq .m-faq details:nth-of-type(7){--accent:#00c8ff}
-@media (prefers-reduced-motion:reduce){.bloco,.bloco .m-card,.bloco .m-faq details,.bloco .m-contact a{opacity:1!important;transform:none!important;transition:none!important}.m-logo .logo,.m-footer-logo .logo{animation:none!important}.revela{opacity:1!important;transform:none!important;transition:none!important}.m-bottom .m-btn-whats,.m-bottom .m-btn-whats::after,.m-submit::after{animation:none!important}}
+/* Acentos: ciano único em tudo (padrão do modelo) */
+@media (prefers-reduced-motion:reduce){.bloco,.bloco .m-card,.bloco .m-faq details,.bloco .m-contact a{opacity:1!important;transform:none!important;transition:none!important}.m-logo .logo,.m-footer-logo .logo{animation:none!important}.revela{opacity:1!important;transform:none!important;transition:none!important}.m-bottom .m-btn-whats,.m-bottom .m-btn-whats::after,.m-submit::after,.m-bottom::before,.m-float::after{animation:none!important}}
 /* ---------- Logo original (Bauhaus 93, intocada) ---------- */
 @font-face{font-family:'Bauhaus 93';src:url('BAUHS93.TTF') format('truetype');font-display:swap}
 @keyframes logoWrite{0%,20%{opacity:.3;filter:blur(1.5px)}25%,95%{opacity:1;filter:blur(0)}100%{opacity:.3;filter:blur(1.5px)}}
@@ -116,15 +110,7 @@ a{color:inherit;text-decoration:none;display:block}
 .m-card p{font-size:.88rem;color:var(--cinza-300)}
 .m-card-cta{margin-top:12px}
 .minibtn-wa{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:700;padding:10px 14px;border-radius:10px;text-decoration:none;background:transparent;border:1px solid rgba(37,211,102,.55);color:#7be495}
-#areas .m-card:nth-of-type(1){--accent:#00c8ff}
-#areas .m-card:nth-of-type(2){--accent:#c77dff}
-#areas .m-card:nth-of-type(3){--accent:#ffb020}
-#areas .m-card:nth-of-type(4){--accent:#00c8ff}
-#areas .m-card:nth-of-type(5){--accent:#c77dff}
-#areas .m-card:nth-of-type(6){--accent:#ffb020}
-#areas .m-card:nth-of-type(7){--accent:#00c8ff}
-#areas .m-card:nth-of-type(8){--accent:#c77dff}
-#areas .m-card:nth-of-type(9){--accent:#ffb020}
+/* Acentos: ciano único em tudo (padrão do modelo) */
 /* ---------- Bloco 3: Formulário ---------- */
 .m-form-card{background:var(--fundo-card);border:1px solid var(--borda-sutil);border-radius:var(--radius-lg);padding:24px 20px}
 .m-form-card p{color:var(--cinza-500);font-size:.86rem;margin-bottom:18px}
@@ -135,7 +121,7 @@ a{color:inherit;text-decoration:none;display:block}
 .m-field textarea{min-height:110px;resize:vertical}
 .m-lgpd{display:flex;gap:10px;align-items:flex-start;font-size:.78rem;color:var(--cinza-300);margin:4px 0 16px;cursor:pointer}
 .m-lgpd input{width:20px;height:20px;flex:0 0 20px;margin-top:2px;accent-color:#25D366}
-.m-submit{width:100%;padding:18px;border-radius:14px;border:1px solid rgba(37,211,102,.55);background:linear-gradient(135deg,#1DA851,#25D366);color:#fff;font-weight:800;font-size:1rem;cursor:pointer;box-shadow:0 8px 30px rgba(37,211,102,.35);min-height:60px}
+.m-submit{width:100%;padding:18px;border-radius:14px;border:1px solid rgba(37,211,102,.55);background:linear-gradient(135deg,#1DA851,#25D366);color:#fff;font-weight:800;font-size:1rem;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 8px 30px rgba(37,211,102,.35);min-height:60px}
 .m-submit{position:relative;overflow:hidden}
 .m-submit::after{content:'';position:absolute;inset:-40%;background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.16) 50%,transparent 58%);transform:translateX(-70%);animation:submitSheen 5.5s ease-in-out infinite;pointer-events:none}
 @keyframes submitSheen{0%{transform:translateX(-70%)}55%,100%{transform:translateX(70%)}}
@@ -147,6 +133,8 @@ a{color:inherit;text-decoration:none;display:block}
 .m-faq summary::-webkit-details-marker{display:none}
 .m-faq summary::before{content:'›';display:inline-block;color:var(--accent,#00c8ff);font-weight:700;margin-right:8px;transition:transform .3s}
 .m-faq details[open] summary::before{transform:rotate(90deg)}
+.m-card[open],.m-faq details[open]{background:rgba(0,120,255,.22);border-color:rgba(0,200,255,.5)}
+#areas:has(.m-card[open]) .m-card:not([open]),#faq:has(details[open]) .m-faq details:not([open]){opacity:.4}
 .m-x{position:absolute;top:-9px;right:4px;width:28px;height:28px;display:none;align-items:center;justify-content:center;background:rgba(255,70,70,.95);color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:7px;font-size:17px;font-weight:700;line-height:1;cursor:pointer;font-family:var(--fonte);z-index:2;box-shadow:0 4px 12px rgba(0,0,0,.45)}
 .m-card[open] summary .m-x,.m-faq details[open] summary .m-x{display:inline-flex}
 .m-faq p{margin-top:8px;color:var(--cinza-300);font-size:.85rem}
@@ -163,10 +151,14 @@ a{color:inherit;text-decoration:none;display:block}
 /* ---------- Botões fixos ---------- */
 .m-float{position:fixed;right:16px;bottom:104px;z-index:60;width:58px;height:58px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 10px 30px rgba(37,211,102,.45);border:1px solid rgba(255,255,255,.25)}
 .m-float svg{width:32px;height:32px;fill:#fff}
+.m-float::after{content:'';position:absolute;inset:-1px;border-radius:50%;border:2px solid rgba(37,211,102,.7);pointer-events:none;animation:ripM 2.4s ease-out infinite}
+@keyframes ripM{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.55);opacity:0}}
 .m-bottom{position:fixed;left:0;right:0;bottom:0;z-index:55;background:rgba(7,13,26,.96);backdrop-filter:blur(12px);border-top:1px solid var(--borda-sutil);padding:10px 12px calc(10px + env(safe-area-inset-bottom))}
 .m-bottom-inner{max-width:480px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .m-bottom .m-btn{min-height:58px;font-size:.82rem;padding:10px 8px;flex-direction:column;gap:2px}
 .m-bottom .m-btn small{font-size:.68rem;font-weight:600;opacity:.9}
+.m-bottom::before{content:'';position:absolute;top:-2px;left:0;right:0;height:3px;background:radial-gradient(ellipse at center,rgba(0,220,255,.95),rgba(0,200,255,.15) 60%,transparent 75%);background-repeat:no-repeat;background-position:center;background-size:14% 100%;animation:glowX 5s ease-in-out infinite;pointer-events:none}
+@keyframes glowX{0%,60%{background-size:14% 100%;opacity:.55}75%{background-size:100% 100%;opacity:1}90%,100%{background-size:14% 100%;opacity:.55}}
 .m-bottom .m-btn-whats{position:relative;overflow:hidden;background:linear-gradient(135deg,#1DA851,#25D366);border:1px solid rgba(37,211,102,.35);color:#fff;box-shadow:0 4px 18px rgba(37,211,102,.18);animation:zapSeq 8.2s ease-in-out infinite}
 .m-bottom .m-btn-whats:last-child{animation-delay:1.6s}
 .m-bottom .m-btn-whats::after{content:'';position:absolute;inset:-40%;background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.12) 50%,transparent 58%);transform:translateX(-70%);opacity:0;animation:zapSheenSeq 8.2s ease-in-out infinite;pointer-events:none}
