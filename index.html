@@ -13,6 +13,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css">
+<script>
+// Redirecionamento inteligente: celular/tablet -> mobile.html (?desktop=1 desativa)
+(function(){try{
+if(/mobile\.html$/i.test(location.pathname))return;
+if(/(^|[?&])desktop=1(&|$)/.test(location.search)){try{sessionStorage.setItem('vs-desktop','1')}catch(e){}return}
+try{if(sessionStorage.getItem('vs-desktop')==='1')return}catch(e){}
+var ua=navigator.userAgent||'';
+var isMobile=/Mobi|Android|iPhone|iPad|iPod|Tablet|Touch|IEMobile|Opera Mini/i.test(ua)||(navigator.maxTouchPoints>1&&/Macintosh/i.test(ua));
+if(isMobile){location.replace('mobile.html')} }catch(e){}})();
+</script>
 </head>
 <body>
 
