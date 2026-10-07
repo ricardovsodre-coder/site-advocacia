@@ -697,41 +697,7 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
     var cepo = new THREE.Mesh(new THREE.LatheGeometry(cepoPerfil, 48), madeira);
     cepo.position.set(-1.9, 0.0, 1.9);
     scene.add(cepo);
-    var martelo = new THREE.Group();
-    function pecaM(geo, mat, x){
-      var m = new THREE.Mesh(geo, mat);
-      m.position.x = x;
-      martelo.add(m);
-      return m;
-    }
-    pecaM(new THREE.CylinderGeometry(0.3, 0.3, 0.7, 32), madeira, 0).rotation.z = Math.PI / 2;
-    pecaM(new THREE.CylinderGeometry(0.335, 0.335, 0.12, 32), madeira, 0.4).rotation.z = Math.PI / 2;
-    pecaM(new THREE.CylinderGeometry(0.335, 0.335, 0.12, 32), madeira, -0.4).rotation.z = Math.PI / 2;
-    pecaM(new THREE.CylinderGeometry(0.305, 0.305, 0.18, 32), ouroVelho, 0).rotation.z = Math.PI / 2;
-    [0.22, -0.22].forEach(function(x){
-      var sulco = new THREE.Mesh(new THREE.TorusGeometry(0.3, 0.022, 10, 40), madeira);
-      sulco.rotation.y = Math.PI / 2;
-      sulco.position.x = x;
-      martelo.add(sulco);
-    });
-    var cabo = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.095, 1.7, 20), madeira);
-    cabo.rotation.z = Math.PI / 2;
-    cabo.position.x = -1.25;
-    martelo.add(cabo);
-    [-0.75, -1.15].forEach(function(x){
-      var an = new THREE.Mesh(new THREE.TorusGeometry(0.095, 0.02, 10, 24), madeira);
-      an.rotation.y = Math.PI / 2;
-      an.position.x = x;
-      martelo.add(an);
-    });
-    var pomo = new THREE.Mesh(new THREE.SphereGeometry(0.11, 20, 16), madeira);
-    pomo.position.x = -2.12;
-    pomo.scale.x = 1.25;
-    martelo.add(pomo);
-    martelo.position.set(-1.9, 0.62, 1.9);
-    martelo.rotation.y = 0.55;
-    martelo.rotation.z = -0.22;
-    scene.add(martelo);
+    // (martelo removido — só a balança + cepo)
     var N = 130, pos = new Float32Array(N * 3), vel = new Float32Array(N);
     for(var k = 0; k < N; k++){
       pos[k*3] = (Math.random() - 0.5) * 5;
