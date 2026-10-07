@@ -136,8 +136,9 @@ a{color:inherit;text-decoration:none;display:block}
 .m-float{position:fixed;right:16px;bottom:104px;z-index:60;width:58px;height:58px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 10px 30px rgba(37,211,102,.45);border:1px solid rgba(255,255,255,.25)}
 .m-float svg{width:32px;height:32px;fill:#fff}
 .m-bottom{position:fixed;left:0;right:0;bottom:0;z-index:55;background:rgba(7,13,26,.96);backdrop-filter:blur(12px);border-top:1px solid var(--borda-sutil);padding:10px 12px calc(10px + env(safe-area-inset-bottom))}
-.m-bottom-inner{max-width:480px;margin:0 auto}
-.m-bottom .m-btn{min-height:58px;font-size:.95rem}
+.m-bottom-inner{max-width:480px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.m-bottom .m-btn{min-height:58px;font-size:.82rem;padding:10px 8px;flex-direction:column;gap:2px}
+.m-bottom .m-btn small{font-size:.68rem;font-weight:600;opacity:.9}
 </style>
 <noscript><style>.bloco,.bloco .m-card,.bloco .m-faq details,.bloco .m-contact a{opacity:1!important;transform:none!important}</style></noscript>
 </head>
@@ -299,7 +300,8 @@ a{color:inherit;text-decoration:none;display:block}
 <!-- Barra fixa com botão grande de polegar -->
 <nav class="m-bottom">
   <div class="m-bottom-inner">
-    <a class="m-btn m-btn-whats" href="https://wa.me/5515988033000?text=Ol%C3%A1%2C%20Dr.%20Ricardo!%20Vim%20pelo%20Instagram%20e%20quero%20falar%20com%20um%20advogado%20especialista.">📱 Falar com Advogado Especialista no WhatsApp</a>
+    <a class="m-btn m-btn-whats" href="https://wa.me/5515988033000?text=Ol%C3%A1%2C%20Dr.%20Ricardo!%20Vim%20pelo%20Instagram%20e%20quero%20falar%20com%20um%20advogado%20especialista.">📱 (15) 98803-3000<small>Sorocaba-SP</small></a>
+    <a class="m-btn m-btn-whats" href="https://wa.me/5511988233000?text=Ol%C3%A1%2C%20Dr.%20Ricardo!%20Vim%20pelo%20Instagram%20e%20quero%20falar%20com%20um%20advogado%20especialista.">📱 (11) 98823-3000<small>São Paulo-SP</small></a>
   </div>
 </nav>
 
