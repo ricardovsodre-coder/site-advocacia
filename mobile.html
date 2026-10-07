@@ -27,19 +27,10 @@ body{font-family:var(--fonte);background:var(--fundo-profundo);color:var(--branc
 a{color:inherit;text-decoration:none;display:block}
 .m-app{max-width:480px;margin:0 auto;min-height:100vh;background:radial-gradient(600px 300px at 50% -50px,rgba(0,140,190,.25),transparent 70%),linear-gradient(180deg,#0B1529 0%,#070D1A 100%)}
 /* ---------- Sistema de blocos com fade ---------- */
-html{scroll-snap-type:y proximity}
-.bloco{height:100vh;height:100dvh;max-height:100dvh;overflow-y:auto;position:-webkit-sticky;position:sticky;top:0;display:flex;flex-direction:column;justify-content:safe center;padding:92px 20px 30px;scroll-margin-top:0;scroll-snap-align:start;background:linear-gradient(180deg,#0C162B 0%,#070D1A 100%);opacity:0;transform:translateY(48px);transition:opacity .7s ease,transform .7s ease,filter .7s ease;will-change:opacity,transform,filter;scrollbar-width:thin;scrollbar-color:rgba(0,200,255,.4) transparent}
+.bloco{padding:34px 20px;scroll-margin-top:70px}
+/* Fumaça desativada */
 .bloco.ativo{opacity:1;transform:none}
-#areas.bloco,#faq.bloco{background:linear-gradient(180deg,#0B1529 0%,#080F1F 100%)}
-.bloco::-webkit-scrollbar{width:6px}
-.bloco::-webkit-scrollbar-thumb{background:rgba(0,200,255,.35);border-radius:99px}
-.bloco::-webkit-scrollbar-track{background:transparent}
-/* Camada de fumaça sobre a página durante a rolagem */
-#fumaca{position:fixed;inset:-10%;z-index:40;pointer-events:none;opacity:0;transition:opacity .45s ease;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.02' numOctaves='3' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.45 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23f)'/%3E%3C/svg%3E");background-size:cover;animation:fumacaDeriva 9s ease-in-out infinite alternate}
-@keyframes fumacaDeriva{from{transform:translate3d(-2%,-1%,0) scale(1)}to{transform:translate3d(2%,2%,0) scale(1.06)}}
-.bloco.ativo{opacity:1;transform:none}
-.bloco .m-card,.bloco .m-faq details,.bloco .m-contact a{opacity:0;transform:translateY(26px);transition:opacity .55s ease,transform .55s ease}
-.bloco.ativo .m-card,.bloco.ativo .m-faq details,.bloco.ativo .m-contact a{opacity:1;transform:none;transition-delay:calc(var(--i,0)*70ms)}
+/* Página corrida: blocos sempre visíveis, sem animação de transição */
 @media (prefers-reduced-motion:reduce){.bloco,.bloco .m-card,.bloco .m-faq details,.bloco .m-contact a{opacity:1!important;transform:none!important;transition:none!important}.m-logo .logo,.m-footer-logo .logo{animation:none!important}}
 /* ---------- Logo original (Bauhaus 93, intocada) ---------- */
 @font-face{font-family:'Bauhaus 93';src:url('BAUHS93.TTF') format('truetype');font-display:swap}
@@ -144,7 +135,7 @@ html{scroll-snap-type:y proximity}
   </header>
 
   <!-- BLOCO 1: ENTRADA -->
-  <section class="bloco ativo" id="hero">
+  <section class="bloco" id="hero">
     <div class="m-hero">
       <span class="m-badge">📍 Sorocaba, São Paulo, e toda região</span>
       <h1>Advogado <span class="highlight">Trabalhista</span>: entenda o que a lei prevê para o <span class="highlight">seu caso</span>.</h1>
@@ -286,9 +277,6 @@ html{scroll-snap-type:y proximity}
 
 </div>
 
-<!-- Camada de fumaça -->
-<div id="fumaca" aria-hidden="true"></div>
-
 <!-- Botão flutuante -->
 <a class="m-float" href="https://wa.me/5515988033000?text=Ol%C3%A1%2C%20Dr.%20Ricardo!%20Vim%20pelo%20Instagram%20e%20quero%20falar%20com%20um%20advogado%20especialista." aria-label="WhatsApp">💬</a>
 
@@ -300,40 +288,7 @@ html{scroll-snap-type:y proximity}
 </nav>
 
 <script>
-// Efeito fumaça: a tela que sai esbranquiça e se dissipa ao arrastar
-(function(){
-  var fuma = document.getElementById('fumaca');
-  var t = null, ticking = false;
-  function aplica(){
-    ticking = false;
-    var vh = window.innerHeight || 700;
-    document.querySelectorAll('.bloco').forEach(function(el){
-      var r = el.getBoundingClientRect();
-      var vis = Math.min(r.bottom, vh) - Math.max(r.top, 0);
-      var base = Math.min(r.height, vh) || 1;
-      var ratio = Math.max(0, Math.min(1, vis / base));
-      if(ratio > 0.4){
-        el.style.opacity = ''; el.style.filter = ''; el.style.transform = '';
-        el.classList.add('ativo');
-      } else {
-        el.classList.remove('ativo');
-        var d = 1 - ratio; // nível de dissipação
-        el.style.opacity = ratio.toFixed(2);
-        el.style.filter = 'blur(' + (d*18).toFixed(1) + 'px) brightness(' + (1 + d*0.9).toFixed(2) + ')';
-        el.style.transform = 'translateY(' + (-d*60).toFixed(0) + 'px) scale(' + (1 + d*0.04).toFixed(3) + ')';
-      }
-    });
-  }
-  function onScroll(){
-    if(!ticking){ ticking = true; requestAnimationFrame(aplica); }
-    fuma.style.opacity = '0.55';
-    clearTimeout(t);
-    t = setTimeout(function(){ fuma.style.opacity = '0'; }, 160);
-  }
-  window.addEventListener('scroll', onScroll, {passive:true});
-  window.addEventListener('resize', onScroll);
-  aplica();
-})();
+// Página corrida: sem efeitos de transição entre blocos.
 // Formulário -> WhatsApp
 document.getElementById('lead-form').addEventListener('submit', function(e){
   e.preventDefault();
