@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Dr. Ricardo Sodré — Advogado Trabalhista (OAB/SP 441.049). Sorocaba, São Paulo e toda região. Horas extras, assédio, verbas rescisórias, sem registro, justa causa, insalubridade, acidente de trabalho.">
+<meta name="theme-color" content="#070D1A">
+<title>Veríssimo Sodré — Advogado Trabalhista | Mobile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ===== MOBILE 5 BLOCOS — azul do logo + fade por rolagem ===== */
+:root{
+  --fundo-profundo:#070D1A; --fundo-navy:#0B1529;
+  --fundo-card:#111E36; --azul-800:#005F85; --azul-700:#0090C8;
+  --azul-500:#00c8ff; --azul-claro:#00c8ff;
+  --azul-glow:0 8px 30px rgba(0,200,255,.35);
+  --branco:#F8FAFC; --cinza-300:#CBD5E1; --cinza-500:#94A3B8;
+  --borda-sutil:rgba(255,255,255,.08); --borda-azul:rgba(0,200,255,.35);
+  --fonte:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --radius-md:12px; --radius-lg:18px; --radius-full:999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--fonte);background:var(--fundo-profundo);color:var(--branco);font-size:1rem;line-height:1.6;-webkit-font-smoothing:antialiased;padding-bottom:96px}
+a{color:inherit;text-decoration:none;display:block}
+.m-app{max-width:480px;margin:0 auto;min-height:100vh;background:radial-gradient(600px 300px at 50% -50px,rgba(0,140,190,.25),transparent 70%),linear-gradient(180deg,#0B1529 0%,#070D1A 100%)}
+/* ---------- Sistema de blocos com fade ---------- */
+.bloco{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:30px 20px;scroll-margin-top:70px;opacity:0;transform:translateY(48px);transition:opacity .7s ease,transform .7s ease}
+.bloco.ativo{opacity:1;transform:none}
+.bloco .m-card,.bloco .m-faq details,.bloco .m-contact a{opacity:0;transform:translateY(26px);transition:opacity .55s ease,transform .55s ease}
+.bloco.ativo .m-card,.bloco.ativo .m-faq details,.bloco.ativo .m-contact a{opacity:1;transform:none;transition-delay:calc(var(--i,0)*70ms)}
+@media (prefers-reduced-motion:reduce){.bloco,.bloco .m-card,.bloco .m-faq details,.bloco .m-contact a{opacity:1!important;transform:none!important;transition:none!important}.m-logo .logo,.m-footer-logo .logo{animation:none!important}}
+/* ---------- Logo original (Bauhaus 93, intocada) ---------- */
+@font-face{font-family:'Bauhaus 93';src:url('BAUHS93.TTF') format('truetype');font-display:swap}
+@keyframes logoWrite{0%,20%{opacity:.3;filter:blur(1.5px)}25%,95%{opacity:1;filter:blur(0)}100%{opacity:.3;filter:blur(1.5px)}}
+/* Header compacto */
+.m-header{position:sticky;top:0;z-index:50;background:rgba(7,13,26,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--borda-sutil)}
+.m-header-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
+.m-logo{display:inline-flex;flex-direction:column;align-items:flex-end;text-align:right;text-decoration:none}
+.m-logo .logo{font-family:'Bauhaus 93',sans-serif;line-height:1;white-space:nowrap;font-size:1.9rem;animation:logoWrite 10s ease-in-out infinite}
+.m-logo .logo .l1{color:#00c8ff;text-shadow:0 0 20px rgba(0,200,255,.35)}
+.m-logo .logo .l2{color:transparent;-webkit-text-stroke:1.6px #00c8ff}
+.m-logo .logo-sub{font-weight:300;letter-spacing:4px;color:#dfe6ec;font-size:.7rem;margin-top:2px;text-align:right;white-space:nowrap}
+.m-header-cta{background:var(--azul-800);border:1px solid var(--azul-700);color:#fff;font-weight:800;font-size:.8rem;padding:10px 14px;border-radius:10px;display:inline-block}
+/* ---------- Bloco 1: Hero ---------- */
+.m-hero{text-align:center}
+.m-badge{display:inline-block;padding:7px 14px;border-radius:var(--radius-full);background:rgba(0,140,190,.18);border:1px solid var(--borda-azul);color:var(--azul-claro);font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px}
+.m-hero h1{font-size:2rem;line-height:1.15;font-weight:900;letter-spacing:-.02em;margin-bottom:12px}
+.m-hero h1 .highlight{color:var(--azul-claro)}
+.m-hero p{color:var(--cinza-300);font-size:.95rem;line-height:1.7;margin-bottom:20px}
+/* Botões grandes de polegar */
+.m-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:18px 20px;border-radius:14px;font-weight:800;font-size:1rem;border:1px solid transparent;cursor:pointer;transition:.2s}
+.m-btn-whats{background:linear-gradient(135deg,var(--azul-800),var(--azul-700));border-color:rgba(0,200,255,.45);color:#fff;box-shadow:var(--azul-glow);min-height:60px}
+.m-btn-whats:active{transform:scale(.98)}
+.m-btn-ghost{background:rgba(255,255,255,.05);border-color:var(--borda-sutil);color:var(--branco);min-height:54px;font-size:.92rem}
+.m-hero-actions{display:grid;gap:12px;margin-bottom:18px}
+.m-stats{display:flex;justify-content:center;gap:24px;text-align:center;margin-bottom:20px}
+.m-stat{font-size:.72rem;color:var(--cinza-500)}
+.m-stat strong{display:block;font-size:1.3rem;color:var(--branco)}
+/* Container 3D centralizado */
+.m-3d-box{width:100%;min-height:260px;border-radius:var(--radius-lg);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.01)),#0E1B33;border:1.5px dashed var(--borda-azul);display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.45);touch-action:pan-y}
+.m-3d-box::before{content:'';position:absolute;inset:0;background:radial-gradient(320px 220px at 50% 40%,rgba(0,200,255,.18),transparent 70%);pointer-events:none}
+.m-3d-inner{padding:24px 20px;color:var(--cinza-500);font-size:.82rem;position:relative;z-index:1}
+.m-3d-inner strong{display:block;color:var(--branco);font-size:.95rem;margin-bottom:6px}
+.m-3d-tag{display:inline-block;margin-top:12px;font-size:.68rem;font-weight:800;letter-spacing:.1em;color:var(--azul-claro);border:1px solid var(--borda-azul);border-radius:var(--radius-full);padding:5px 12px}
+/* ---------- Títulos de seção ---------- */
+.m-label{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--azul-claro);background:rgba(0,140,190,.15);border:1px solid var(--borda-azul);padding:6px 12px;border-radius:var(--radius-full);margin-bottom:10px}
+.m-title{font-size:1.45rem;font-weight:800;line-height:1.25;margin-bottom:18px}
+.m-title .highlight{color:var(--azul-claro)}
+/* ---------- Bloco 2: Atuação (padrão do modelo) ---------- */
+.m-cards{display:grid;gap:10px}
+.m-card{background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,.02) 42%,rgba(0,200,255,.07));border:1px solid rgba(255,255,255,.16);border-top:3px solid var(--accent,#00c8ff);border-radius:14px;padding:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.22)}
+.m-card summary{cursor:pointer;list-style:none}
+.m-card summary::-webkit-details-marker{display:none}
+.m-card summary::before{content:'›';display:inline-block;color:#00c8ff;font-weight:700;margin-right:8px;transition:transform .3s}
+.m-card[open] summary::before{transform:rotate(90deg)}
+.m-card summary h3{display:inline;font-size:1.02rem;color:var(--accent,#00c8ff)}
+.m-card .prazo{display:inline-block;font-size:.72rem;font-weight:700;color:#ffd166;background:rgba(255,209,102,.1);border:1px solid rgba(255,209,102,.45);border-radius:20px;padding:3px 10px;margin:8px 0 2px}
+.m-card h4{font-size:.85rem;color:#9be9ff;margin:10px 0 4px}
+.m-card p{font-size:.88rem;color:var(--cinza-300)}
+.m-card-cta{margin-top:12px}
+.minibtn-wa{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:700;padding:10px 14px;border-radius:10px;text-decoration:none;background:transparent;border:1px solid rgba(0,200,255,.5);color:#9be9ff}
+#areas .m-card:nth-of-type(1){--accent:#00c8ff}
+#areas .m-card:nth-of-type(2){--accent:#4cc9f0}
+#areas .m-card:nth-of-type(3){--accent:#f72585}
+#areas .m-card:nth-of-type(4){--accent:#ffb020}
+#areas .m-card:nth-of-type(5){--accent:#c77dff}
+#areas .m-card:nth-of-type(6){--accent:#3ddc84}
+#areas .m-card:nth-of-type(7){--accent:#ff9f43}
+#areas .m-card:nth-of-type(8){--accent:#ff5d5d}
+#areas .m-card:nth-of-type(9){--accent:#80ed99}
+/* ---------- Bloco 3: Formulário ---------- */
+.m-form-card{background:var(--fundo-card);border:1px solid var(--borda-sutil);border-radius:var(--radius-lg);padding:24px 20px}
+.m-form-card p{color:var(--cinza-500);font-size:.86rem;margin-bottom:18px}
+.m-field{margin-bottom:14px}
+.m-field label{display:block;font-size:.8rem;font-weight:700;margin-bottom:6px;color:var(--cinza-300)}
+.m-field input{width:100%;padding:16px;border-radius:12px;border:1px solid var(--borda-sutil);background:#0B1529;color:var(--branco);font-size:1rem;font-family:var(--fonte);min-height:54px}
+.m-field input:focus{outline:none;border-color:var(--azul-500);box-shadow:0 0 0 3px rgba(0,200,255,.2)}
+.m-submit{width:100%;padding:18px;border-radius:14px;border:1px solid rgba(0,200,255,.45);background:linear-gradient(135deg,var(--azul-800),var(--azul-700));color:#fff;font-weight:800;font-size:1rem;cursor:pointer;box-shadow:var(--azul-glow);min-height:60px}
+.m-form-note{margin-top:12px;font-size:.75rem;color:var(--cinza-500);text-align:center}
+/* ---------- Bloco 4: FAQ ---------- */
+.m-faq{display:grid;gap:10px}
+.m-faq details{background:var(--fundo-card);border:1px solid var(--borda-sutil);border-radius:12px;padding:16px}
+.m-faq summary{font-weight:700;font-size:.9rem;cursor:pointer}
+.m-faq p{margin-top:8px;color:var(--cinza-300);font-size:.85rem}
+/* ---------- Bloco 5: Contato + rodapé ---------- */
+.m-contact{display:grid;gap:10px;margin-bottom:24px}
+.m-contact a{background:var(--fundo-card);border:1px solid var(--borda-sutil);border-radius:12px;padding:16px;font-size:.88rem}
+.m-contact a strong{display:block;font-size:.78rem;color:var(--cinza-500);margin-bottom:2px}
+.m-footer{text-align:center;color:var(--cinza-500);font-size:.72rem}
+.m-footer-logo{display:flex;flex-direction:column;align-items:center;margin-bottom:10px}
+.m-footer-logo .logo{font-family:'Bauhaus 93',sans-serif;line-height:1;white-space:nowrap;font-size:1.9rem;animation:logoWrite 10s ease-in-out infinite}
+.m-footer-logo .logo .l1{color:#00c8ff;text-shadow:0 0 20px rgba(0,200,255,.35)}
+.m-footer-logo .logo .l2{color:transparent;-webkit-text-stroke:1.6px #00c8ff}
+.m-footer-logo .logo-sub{font-weight:300;letter-spacing:4px;color:#dfe6ec;font-size:.7rem;margin-top:2px;white-space:nowrap}
+/* ---------- Botões fixos ---------- */
+.m-float{position:fixed;right:16px;bottom:104px;z-index:60;width:58px;height:58px;border-radius:50%;background:#00c8ff;display:grid;place-items:center;font-size:1.6rem;box-shadow:0 10px 30px rgba(0,200,255,.45);border:1px solid rgba(255,255,255,.25)}
+.m-bottom{position:fixed;left:0;right:0;bottom:0;z-index:55;background:rgba(7,13,26,.96);backdrop-filter:blur(12px);border-top:1px solid var(--borda-sutil);padding:10px 12px calc(10px + env(safe-area-inset-bottom))}
+.m-bottom-inner{max-width:480px;margin:0 auto}
+.m-bottom .m-btn{min-height:58px;font-size:.95rem}
+</style>
+<noscript><style>.bloco,.bloco .m-card,.bloco .m-faq details,.bloco .m-contact a{opacity:1!important;transform:none!important}</style></noscript>
+</head>
+<body>
+<div class="m-app">
+
+  <!-- TOPO FIXO (logo original) -->
+  <header class="m-header">
+    <div class="m-header-inner">
+      <a class="m-logo" href="#hero"><span class="logo"><span class="l1">veríssimo</span><span class="l2">sodré</span></span><span class="logo-sub">escritório jurídico</span></a>
+      <a class="m-header-cta" href="https://wa.me/5515988033000?text=Ol%C3%A1%2C%20Dr.%20Ricardo!%20Vim%20pelo%20Instagram%20e%20preciso%20de%20orienta%C3%A7%C3%A3o%20trabalhista.">WhatsApp</a>
+    </div>
+  </header>
+
+  <!-- BLOCO 1: ENTRADA -->
+  <section class="bloco ativo" id="hero">
+    <div class="m-hero">
+      <span class="m-badge">📍 Sorocaba, São Paulo, e toda região</span>
+      <h1>Advogado <span class="highlight">Trabalhista</span>: entenda o que a lei prevê para o <span class="highlight">seu caso</span>.</h1>
+      <p>Advogado trabalhista do lado do empregado.<br>Horas extras, assédio, sem registro, verbas rescisórias, justa causa, insalubridade.</p>
+    </div>
+    <div class="m-hero-actions">
+      <a class="m-btn m-btn-whats" href="https://wa.me/5515988033000?text=Ol%C3%A1%2C%20Dr.%20Ricardo!%20Vim%20pelo%20Instagram%20e%20quero%20falar%20com%20um%20advogado%20especialista.">💬 Falar com Advogado Especialista no WhatsApp</a>
+      <a class="m-btn m-btn-ghost" href="#areas">Ver áreas de atuação ↓</a>
+    </div>
+    <div class="m-stats">
+      <div class="m-stat"><strong>9</strong>áreas de atuação</div>
+      <div class="m-stat"><strong>5</strong>perguntas/dia grátis</div>
+      <div class="m-stat"><strong>100%</strong>foco no empregado</div>
+    </div>
+    <div class="m-3d-box" id="espaco-3d-mobile" data-3d="tabua-da-lei-touch" aria-label="Espaço reservado para elemento 3D interativo">
+      <div class="m-3d-inner">
+        <strong>🏛️ Espaço 3D Interativo</strong>
+        Aqui será embutida a Tábua da Lei 3D<br>otimizada para telas de toque.
+        <br><span class="m-3d-tag">TOUCH READY · 360°</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOCO 2: ATUAÇÃO -->
+  <section class="bloco" id="areas">
+    <span class="m-label">Atuação</span>
+    <h2 class="m-title">O que a lei prevê para <span class="highlight">você</span>?</h2>
+    <div class="m-cards">
+
+      <details class="m-card" style="--i:0"><summary><h3>01 · Verbas rescisórias</h3></summary><span class="prazo">⏳ patrão tem 10 dias para pagar</span>
+        <h4>O que é?</h4><p>Valores ao encerrar o contrato. Dependem do motivo da saída (pedido, sem justa causa ou acordo): saldo de salário, aviso prévio, férias proporcionais e vencidas (+ 1/3), 13º proporcional, multa de 40% e saque do FGTS (estes dois, só sem justa causa).</p>
+        <h4>O que a lei diz?</h4><p>Saldo = salário ÷ 30 × dias. 13º = salário ÷ 12 × meses. Férias = salário ÷ 12 × meses + 1/3. Aviso indenizado = 1 salário + 3 dias/ano (até 90 dias, Lei 12.506/2011). Pagamento em até 10 dias (CLT 477), com multa de 1 salário se atrasar.</p>
+        <h4>O que fazer?</h4><p>Confira o TRCT antes de assinar. Guarde holerites, extrato do FGTS e o aviso de demissão.</p>
+        <div class="m-card-cta"><a class="minibtn-wa" href="https://wa.me/5515988033000?text=Ol%C3%A1%2C+Dr.+Ricardo.+Gostaria+de+uma+an%C3%A1lise+sobre+verbas+rescis%C3%B3rias." target="_blank" rel="noopener">Chamar no WhatsApp</a></div></details>
+
+      <details class="m-card" style="--i:1"><summary><h3>02 · Horas extras</h3></summary><span class="prazo">⏳ dá para cobrar os últimos 5 anos</span>
+        <h4>O que é?</h4><p>Tudo além da jornada (8h/dia, 44h/semana): ponto ajustado, chegada antes/saída depois, trabalho em casa e almoço menor que 1h. Banco de horas sem acordo escrito e descanso suprimido também geram diferenças.</p>
+        <h4>O que a lei diz?</h4><p>Hora = salário ÷ 220 × 1,5 (mínimo 50%, CF art. 7º XVI); domingo/feriado valem o dobro. Aumentam férias + 1/3, 13º, aviso, descanso e FGTS. Prazo: 5 anos (2 após a saída).</p>
+        <h4>O que fazer?</h4><p>Guarde fotos do ponto, escalas, mensagens com horários e holerites dos últimos 5 anos.</p>
+        <div class="m-card-cta"><a class="minibtn-wa" href="https://wa.me/5515988033000?text=Ol%C3%A1%2C+Dr.+Ricardo.+Gostaria+de+uma+an%C3%A1lise+sobre+horas+extras." target="_blank" rel="noopener">Chamar no WhatsApp</a></div></details>
+
+      <details class="m-card" style="--i:2"><summary><h3>03 · Assédio moral</h3></summary><span class="prazo">⏳ ação em até 2 anos após a saída</span>
+        <h4>O que é?</h4><p>Humilhação repetida para desestabilizar: gritos, apelidos, isolamento, metas impossíveis e pressão para pedir demissão. Bronca isolada não configura — o que conta é a repetição.</p>
+        <h4>O que a lei diz?</h4><p>Dignidade protegida pela Constituição (art. 1º III, art. 5º V e X) com indenização por dano moral. Faltas graves do patrão autorizam rescisão indireta (CLT 483). Valor varia com gravidade, duração, provas e porte da empresa.</p>
+        <h4>O que fazer?</h4><p>Anote data, hora, local e testemunhas. Salve mensagens e grave quando possível. Não peça demissão antes de se orientar.</p>
+        <div class="m-card-cta"><a class="minibtn-wa" href="https://wa.me/5515988033000?text=Ol%C3%A1%2C+Dr.+Ricardo.+Gostaria+de+uma+an%C3%A1lise+sobre+ass%C3%A9dio+moral." target="_blank" rel="noopener">Chamar no WhatsApp</a></div></details>
+
+      <details class="m-card" style="--i:3"><summary><h3>04 · Sem registro</h3></summary><span class="prazo">⏳ ação em até 2 anos após a saída</span>
+        <h4>O que é?</h4><p>Sem carteira assinada, há vínculo se existirem: trabalho pessoal, contínuo, com horário, ordens e pagamento. Vale para mensalistas, diaristas fixos e até MEI de fachada — vale a realidade, não o papel.</p>
+        <h4>O que a lei diz?</h4><p>Registro obrigatório (CLT 41); vínculo pelos requisitos do art. 3º. Reconhecido, paga-se tudo retroativo: FGTS + 40%, 13º, férias + 1/3 e INSS. Sem registro você perde PIS e tempo de aposentadoria. Prazo: 2 anos após a saída.</p>
+        <h4>O que fazer?</h4><p>Junte mensagens, fotos, comprovantes de pagamento, escalas e testemunhas.</p>
+        <div class="m-card-cta"><a class="minibtn-wa" href="https://wa.me/5515988033000?text=Ol%C3%A1%2C+Dr.+Ricardo.+Gostaria+de+uma+an%C3%A1lise+sobre+trabalho+sem+registro." target="_blank" rel="noopener">Chamar no WhatsApp</a></div></details>
+
+      <details class="m-card" style="--i:4"><summary><h3>05 · Justa causa</h3></summary><span class="prazo">⏳ quanto antes contestar, melhor</span>
+        <h4>O que é?</h4><p>Punição máxima, só para faltas graves da lei: desonestidade, abandono (30+ dias), embriaguez, indisciplina grave. Precisa ser imediata, proporcional e igual para todos. Nela você perde: aviso, 13º e férias proporcionais, 40%, saque do FGTS e seguro-desemprego.</p>
+        <h4>O que a lei diz?</h4><p>CLT art. 482 traz a lista fechada. A Justiça exige imediatidade, proporcionalidade e advertências antes em faltas leves. Sem prova, com demora ou punição só para você, reverte tudo + seguro-desemprego.</p>
+        <h4>O que fazer?</h4><p>Traga carta de demissão, advertências, conversas e testemunhas. Não assine confissões na hora.</p>
+        <div class="m-card-cta"><a class="minibtn-wa" href="https://wa.me/5515988033000?text=Ol%C3%A1%2C+Dr.+Ricardo.+Gostaria+de+uma+an%C3%A1lise+sobre+justa+causa." target="_blank" rel="noopener">Chamar no WhatsApp</a></div></details>
+
+      <details class="m-card" style="--i:5"><summary><h3>06 · Insalubridade</h3></summary><span class="prazo">⏳ dá para cobrar os últimos 5 anos</span>
+        <h4>O que é?</h4><p>Insalubridade: barulho, calor, químicos, agentes biológicos. Periculosidade: risco de vida (eletricidade, inflamáveis, vigilância, moto). Adicional todo mês — recebe-se um dos dois, o melhor.</p>
+        <h4>O que a lei diz?</h4><p>Insalubridade: 10%, 20% ou 40% (NR-15). Periculosidade: 30% do salário (CLT 193). Você escolhe o melhor (art. 193 § 2º). Prova por perícia (art. 195). Aumenta férias + 1/3, 13º, aviso e FGTS.</p>
+        <h4>O que fazer?</h4><p>Fotografe o ambiente, anote a exposição e guarde laudos e holerites.</p>
+        <div class="m-card-cta"><a class="minibtn-wa" href="https://wa.me/5515988033000?text=Ol%C3%A1%2C+Dr.+Ricardo.+Gostaria+de+uma+an%C3%A1lise+sobre+insalubridade+ou+periculosidade." target="_blank" rel="noopener">Chamar no WhatsApp</a></div></details>
+
+      <details class="m-card" style="--i:6"><summary><h3>07 · Acidente / doença</h3></summary><span class="prazo">⏳ CAT imediata + 12 meses de estabilidade</span>
+        <h4>O que é?</h4><p>Acidente no serviço ou por causa dele; doença ocupacional (LER, surdez, coluna, burnout). Direitos: afastamento pelo INSS, 12 meses de estabilidade na volta, auxílio-acidente em caso de sequela e indenizações.</p>
+        <h4>O que a lei diz?</h4><p>Empresa deve emitir a CAT. Estabilidade de 12 meses após o retorno (Lei 8.213/91 art. 118); auxílio mensal com sequela (art. 86). Falta de segurança (sem EPI/treinamento) aumenta as indenizações.</p>
+        <h4>O que fazer?</h4><p>Guarde atestados, exames, CAT e mensagens. Fotografe o local e anote testemunhas. Não assine alta sem orientação.</p>
+        <div class="m-card-cta"><a class="minibtn-wa" href="https://wa.me/5515988033000?text=Ol%C3%A1%2C+Dr.+Ricardo.+Gostaria+de+uma+an%C3%A1lise+sobre+acidente+de+trabalho." target="_blank" rel="noopener">Chamar no WhatsApp</a></div></details>
+
+      <details class="m-card" style="--i:7"><summary><h3>08 · Rescisão indireta</h3></summary><span class="prazo">⏳ oriente-se antes de sair</span>
+        <h4>O que é?</h4><p>A justa causa do patrão: salário atrasado, FGTS sem depósito, humilhações, tarefas perigosas ou corte de salário. Você sai recebendo tudo como sem justa causa: aviso, 13º, férias + 1/3, FGTS + 40% e seguro-desemprego.</p>
+        <h4>O que a lei diz?</h4><p>CLT art. 483 lista as faltas; o juiz reconhece em ação. Continue trabalhando até a decisão — sair antes sem orientação pode virar pedido de demissão, e você perde quase tudo.</p>
+        <h4>O que fazer?</h4><p>Reúna holerites, extrato do FGTS, mensagens e testemunhas antes de qualquer passo. Oriente-se primeiro.</p>
+        <div class="m-card-cta"><a class="minibtn-wa" href="https://wa.me/5515988033000?text=Ol%C3%A1%2C+Dr.+Ricardo.+Gostaria+de+uma+an%C3%A1lise+sobre+rescis%C3%A3o+indireta." target="_blank" rel="noopener">Chamar no WhatsApp</a></div></details>
+
+      <details class="m-card" style="--i:8"><summary><h3>09 · Acordo coletivo</h3></summary><span class="prazo">⏳ confira a vigência do acordo</span>
+        <h4>O que é?</h4><p>Acordos e convenções valem como lei para a categoria e dão extras: pisos maiores, diárias, adicionais, PLR e jornadas especiais. Caminhoneiros, vigilantes, comerciários e construção civil costumam ter cláusulas fortes.</p>
+        <h4>O que a lei diz?</h4><p>CLT arts. 611 e 611-A + Constituição art. 7º XXVI. O negociado prevalece nos pontos permitidos e deve ser cumprido mesmo contra o contrato. Confira a vigência.</p>
+        <h4>O que fazer?</h4><p>Descubra seu sindicato, peça a cópia vigente e traga holerites para conferência.</p>
+        <div class="m-card-cta"><a class="minibtn-wa" href="https://wa.me/5515988033000?text=Ol%C3%A1%2C+Dr.+Ricardo.+Gostaria+de+uma+an%C3%A1lise+sobre+acordo+ou+conven%C3%A7%C3%A3o+coletiva." target="_blank" rel="noopener">Chamar no WhatsApp</a></div></details>
+
+    </div>
+  </section>
+
+  <!-- BLOCO 3: CONTATO (FORMULÁRIO) -->
+  <section class="bloco" id="agendar">
+    <span class="m-label">Contato</span>
+    <h2 class="m-title">Agende sua <span class="highlight">consulta</span>.</h2>
+    <div class="m-form-card">
+      <p>Preencha abaixo. Enviamos direto para o WhatsApp do escritório.</p>
+      <form id="lead-form">
+        <div class="m-field">
+          <label for="f-nome">Nome *</label>
+          <input id="f-nome" name="nome" type="text" placeholder="Ex.: Maria Silva" required autocomplete="name">
+        </div>
+        <div class="m-field">
+          <label for="f-fone">Celular / WhatsApp *</label>
+          <input id="f-fone" name="fone" type="tel" placeholder="(15) 90000-0000" required autocomplete="tel">
+        </div>
+        <button class="m-submit" type="submit">Enviar Mensagem / Agendar Consulta</button>
+      </form>
+      <p class="m-form-note">🛡️ Seu caso será recebido com carinho e analisado com atenção técnica, dentro da lei.</p>
+    </div>
+  </section>
+
+  <!-- BLOCO 4: DÚVIDAS (FAQ) -->
+  <section class="bloco" id="faq">
+    <span class="m-label">Dúvidas</span>
+    <h2 class="m-title">Perguntas <span class="highlight">frequentes</span>.</h2>
+    <div class="m-faq">
+      <details style="--i:0"><summary>Como saber se tenho direito a horas extras?</summary><p>Se trabalha mais que 8h/dia ou 44h/semana, sim. O excesso é +50% no mínimo. Guarde comprovantes: mensagens, testemunhas, e-mails.</p></details>
+      <details style="--i:1"><summary>Sem carteira assinada, tenho direitos?</summary><p>Sim. Se tinha horário, chefe e pagamento, a Justiça reconhece o vínculo e manda pagar FGTS, 13º, férias, multa de 40%.</p></details>
+      <details style="--i:2"><summary>Posso ser demitido por justa causa?</summary><p>Só com falta grave comprovada. Se não provaram, a Justiça reverte e você recebe como demissão sem justa causa + FGTS + seguro.</p></details>
+      <details style="--i:3"><summary>Quanto tempo dura um processo trabalhista?</summary><p>Varia. Cidades pequenas: 6-12 meses. Capital: 12-24 meses. Urgência? Peça tutela antecipada para receber antes.</p></details>
+      <details style="--i:4"><summary>Quanto custa um advogado trabalhista?</summary><p>Honorários de êxito: percentual sobre o valor recebido, conforme a tabela da OAB. Primeira análise sem compromisso.</p></details>
+      <details style="--i:5"><summary>Posso pedir demissão e receber?</summary><p>Depende. Se o patrão descumpriu (salário atrasado, FGTS), pode pedir rescisão indireta e receber como demissão.</p></details>
+      <details style="--i:6"><summary>E se o patrão ameaçar?</summary><p>Ameaça é assédio. Anote tudo e procure um advogado. A CLT protege quem denuncia (art. 477-A).</p></details>
+    </div>
+  </section>
+
+  <!-- BLOCO 5: FALE CONOSCO (RODAPÉ) -->
+  <section class="bloco" id="contato">
+    <span class="m-label">Fale conosco</span>
+    <h2 class="m-title">Atendimento <span class="highlight">imediato</span>.</h2>
+    <div class="m-contact">
+      <a href="https://wa.me/5515988033000" style="--i:0"><strong>WhatsApp Sorocaba-SP</strong>(15) 98803-3000</a>
+      <a href="https://wa.me/5511988233000" style="--i:1"><strong>WhatsApp São Paulo-SP</strong>(11) 98823-3000</a>
+      <a href="mailto:escritorio@verissimosodre.com.br" style="--i:2"><strong>E-mail</strong>escritorio@verissimosodre.com.br</a>
+      <a href="https://maps.google.com/?q=Rua+Vinte+e+Oito+de+Outubro,+215+-+26B+-+Alto+da+Boa+Vista+-+Sorocaba-SP" style="--i:3"><strong>Endereço</strong>Rua Vinte e Oito de Outubro, 215 - 26B - Sorocaba/SP</a>
+    </div>
+    <footer class="m-footer">
+      <div class="m-footer-logo"><span class="logo"><span class="l1">veríssimo</span><span class="l2">sodré</span></span><span class="logo-sub">escritório jurídico</span></div>
+      <p>Dr. Ricardo Veríssimo Sodré — OAB/SP 441.049</p>
+      <p>© 2026 Veríssimo Sodré Escritório Jurídico.<br>Orientação informativa — análise definitiva mediante consulta.</p>
+    </footer>
+  </section>
+
+</div>
+
+<!-- Botão flutuante -->
+<a class="m-float" href="https://wa.me/5515988033000?text=Ol%C3%A1%2C%20Dr.%20Ricardo!%20Vim%20pelo%20Instagram%20e%20quero%20falar%20com%20um%20advogado%20especialista." aria-label="WhatsApp">💬</a>
+
+<!-- Barra fixa com botão grande de polegar -->
+<nav class="m-bottom">
+  <div class="m-bottom-inner">
+    <a class="m-btn m-btn-whats" href="https://wa.me/5515988033000?text=Ol%C3%A1%2C%20Dr.%20Ricardo!%20Vim%20pelo%20Instagram%20e%20quero%20falar%20com%20um%20advogado%20especialista.">📱 Falar com Advogado Especialista no WhatsApp</a>
+  </div>
+</nav>
+
+<script>
+// Fade-in / fade-out dos blocos conforme a rolagem
+(function(){
+  var blocos = document.querySelectorAll('.bloco');
+  if(!('IntersectionObserver' in window)){ blocos.forEach(function(b){ b.classList.add('ativo'); }); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('ativo'); }
+      else { e.target.classList.remove('ativo'); }
+    });
+  }, {threshold: 0.15});
+  blocos.forEach(function(b){ io.observe(b); });
+})();
+// Formulário -> WhatsApp
+document.getElementById('lead-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  var nome = document.getElementById('f-nome').value.trim();
+  var fone = document.getElementById('f-fone').value.trim();
+  if(!nome || !fone){ return; }
+  var msg = 'Olá, Dr. Ricardo! Vim pelo Instagram e quero agendar uma consulta.%0A%0A'
+    + 'Nome: ' + encodeURIComponent(nome) + '%0A'
+    + 'Celular/WhatsApp: ' + encodeURIComponent(fone);
+  window.open('https://wa.me/5515988033000?text=' + msg, '_blank');
+});
+</script>
+</body>
+</html>
